@@ -6,11 +6,7 @@ import Col from 'react-bootstrap/Col';
 
 import './Home.css';
 
-const Home = (props) => {
-    // Destructuring
-    const { setGameStarted } = props;
-  
-    // Render
+const Home = ({ setGameStarted }) => {
     return (
       <section className='home background'>
         <Container>
@@ -18,15 +14,9 @@ const Home = (props) => {
             <Col>
               <div className='home-control'>
                 <div style={{ maxWidth: '320px', margin: 'auto' }}>
-                  <div
-                    style={{
-                      backgroundColor: 'rgba(0,0,0,0.7)',
-                      padding: '0.8rem',
-                      borderRadius: '10px',
-                    }}>
+                  <div className='info'>
                     <p className='text-light'>
-                      Seja bem vindo ao Show do Milhão! Este é um projeto experimental, desenvolvido
-                      com React por{' '}
+                      Seja bem-vindo ao Show do Milhão! Este projeto foi desenvolvido por{' '}
                       <a
                         target='_blank'
                         rel='noopener noreferrer'
@@ -34,10 +24,7 @@ const Home = (props) => {
                         Lucas Voltera
                       </a>{' '}
                       e{' '}
-                       <a
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        href='https://github.com/becelli'>
+                      <a target='_blank' rel='noopener noreferrer' href='https://github.com/becelli'>
                         Gustavo Becelli
                       </a>{' '}
                       para a disciplina de FPGA.
@@ -56,3 +43,4 @@ const Home = (props) => {
   };
   
   export default Home;
+  
