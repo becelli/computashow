@@ -1,6 +1,6 @@
-import { Question } from "./types";
+import { IQuestion } from "./types";
 
-export const questions: Question[] = [
+export const questions: IQuestion[] = [
   {
     question: 'O que é um circuito digital?',
     options:  ['Um circuito que opera com sinais analógicos', 'Um circuito que opera com sinais digitais', 'Um circuito que opera com sinais contínuos', 'Um circuito que opera com sinais discretos'],

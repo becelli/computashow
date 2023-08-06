@@ -1,17 +1,13 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import { useState } from "react";
-import Home from "./home";
-import Game from "./game";
+import { Home } from "~/pages/home";
+import { Game } from "~/pages/game";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function App() {
+export default function App(): React.ReactElement {
   const [gameStarted, setGameStarted] = useState<boolean>(false);
 
-  if (gameStarted) {
-    return <Game setGameStarted={setGameStarted} />
-  }
+  // if (gameStarted) {
+  return <Game setGameStarted={setGameStarted} />;
+  // }
 
-  return <Home setGameStarted={setGameStarted} />;
+  // return <Home setGameStarted={setGameStarted} />;
 }

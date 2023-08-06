@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { UnclosableModal } from "~/components/unclosable-modal";
-import { Question } from "~/data/questions-per-level/types";
-import { RewardPerLevel } from "~/data/rewards-per-level";
+import { IQuestion } from "~/data/questions-per-level/types";
+import { rewardPerLevel } from "~/data/rewards-per-level";
 
 export function GameOverModal({
   title,
@@ -17,7 +17,7 @@ export function GameOverModal({
   title: string;
   showModal: boolean;
   setShowModal: any;
-  currentQuestion: Question | null;
+  currentQuestion: IQuestion | null;
   timeToAnswer: number;
   gameOver: boolean;
   gameWon: boolean;
@@ -28,7 +28,7 @@ export function GameOverModal({
     return <Fragment />;
   }
   const correctAnswer = currentQuestion.options[currentQuestion.response - 1];
-  const reward = currentLevel === 1 ? "500" : `${(RewardPerLevel[currentLevel] / 2).toString().slice(0, -3)} mil`;
+  const reward = currentLevel === 1 ? "500" : `${(rewardPerLevel[currentLevel] / 2).toString().slice(0, -3)} mil`;
   return (
     <UnclosableModal title={title} showModal={showModal}>
       <section className="text-black">

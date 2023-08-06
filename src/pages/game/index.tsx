@@ -1,21 +1,25 @@
 import Image from "next/image";
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
-import { RewardPerLevel } from "~/data/rewards-per-level";
+import { rewardPerLevel } from "~/data/rewards-per-level";
 import { questions } from "~/data/questions-per-level";
-import { UnclosableModal } from "~/components/unclosable-modal";
-import { Question } from "~/data/questions-per-level/types";
-import { GameProps } from "~/pages/game/props";
-import { Responses } from "~/components/prizes";
+import { IQuestion } from "~/data/questions-per-level/types";
+import { Answer } from "~/pages/game/components/answer";
 import { GameOverModal } from "~/pages/game/components/game-over-modal";
+import { Question } from "~/pages/game/components/question";
+import { GameState } from "~/pages/game/types";
 
-const Game = ({ setGameStarted }: GameProps) => {
+export interface GameProps {
+  setGameStarted: (value: boolean) => void;
+}
+
+export function Game({ setGameStarted }: GameProps) {
   // States
-  const [easyQuestions, setEasyQuestions] = useState<Question[] | null>(null);
-  const [averageQuestions, setAverageQuestions] = useState<Question[] | null>(null);
-  const [hardQuestions, setHardQuestions] = useState<Question[] | null>(null);
+  const [easyQuestions, setEasyQuestions] = useState<IQuestion[] | null>(null);
+  const [averageQuestions, setAverageQuestions] = useState<IQuestion[] | null>(null);
+  const [hardQuestions, setHardQuestions] = useState<IQuestion[] | null>(null);
 
-  const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
+  const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(null);
   const [currentLevel, setCurrentLevel] = useState(0);
 
   const [beginTimer, setBeginTimer] = useState<number | undefined>(undefined);
@@ -28,10 +32,11 @@ const Game = ({ setGameStarted }: GameProps) => {
 
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false);
+  const [gameState, setGameState] = useState<GameState>(GameState.playing);
 
-  const [correctAnswer, setCorrectAnswer] = useState(false);
+  const [answerCorrectness, setAnswerCorrectness] = useState(false);
 
-  const [passQuestionAvailable, setPassQuestionAvailable] = useState(3);
+  const [questionSkipsAvailable, setQuestionSkipsAvailable] = useState(3);
 
   const separateQuestionsPerLevel = () => {
     const question = structuredClone(questions);
@@ -60,8 +65,6 @@ const Game = ({ setGameStarted }: GameProps) => {
         break;
       case 2:
         setHardQuestions(ArrayQuestions);
-        break;
-      default:
         break;
     }
 
@@ -125,25 +128,39 @@ const Game = ({ setGameStarted }: GameProps) => {
     const isCorrectAnswer = currentQuestion.response === answer;
 
     if (isCorrectAnswer) {
-      setCorrectAnswer(true);
+      setAnswerCorrectness(true);
       setTimeout(() => {
-        setCorrectAnswer(false);
+        setAnswerCorrectness(false);
         nextLevel();
       }, 1500);
     } else {
-      setGameOver(true);
+      // setGameOver(true);
+      setGameState(GameState.gameOver);
       setShowModal(true);
     }
   };
 
   // Pula a pergunta
-  const passQuestion = () => {
-    setPassQuestionAvailable((p) => p - 1);
+  function skipQuestion(): void {
+    setQuestionSkipsAvailable((availableSkips) => availableSkips - 1);
     getRandomQuestion(currentLevel);
     startQuestionTimer();
   };
 
-  const title = timeToAnswer === 0 ? "Tempo esgotado" : gameOver ? "Resposta errada" : gameWon ? "Você ganhou!!" : "";
+  if (currentQuestion === null) return null;
+
+  // const title = timeToAnswer === 0 ? "Tempo esgotado" : gameOver ? "Resposta errada" : gameWon ? "Você ganhou!!" : "";
+  function getTitle(state: GameState): string {
+    switch (state) {
+      case GameState.gameOver:
+        return "Resposta errada";
+      case GameState.gameWon:
+        return "Você ganhou!";
+      case GameState.timeOver:
+        return "Tempo esgotado";
+    }
+    }
+  const title = getTitle(gameState);
 
   return (
     <section className="flex flex-col justify-between h-screen bg-gradient-to-tl from-black to-black via-blue-900">
@@ -167,14 +184,14 @@ const Game = ({ setGameStarted }: GameProps) => {
           <Question beginCounter={beginCounter} currentQuestion={currentQuestion} />
 
           {beginCounter === 0 && currentQuestion && (
-            <Responses
+            <Answer
               answerQuestion={answerQuestion}
               currentQuestion={currentQuestion}
-              correctAnswer={correctAnswer}
+              correctAnswer={answerCorrectness}
               currentLevel={currentLevel}
-              passQuestion={passQuestion}
-              passQuestionAvailable={passQuestionAvailable}
-              rewardPerLevel={RewardPerLevel}
+              passQuestion={skipQuestion}
+              passQuestionAvailable={questionSkipsAvailable}
+              rewardPerLevel={rewardPerLevel}
               setGameStarted={setGameStarted}
             />
           )}
@@ -182,7 +199,7 @@ const Game = ({ setGameStarted }: GameProps) => {
       </section>
     </section>
   );
-};
+}
 
 function CurrentQuestion({ beginCounter, currentLevel }: any) {
   if (beginCounter !== 0) {
@@ -194,17 +211,3 @@ function CurrentQuestion({ beginCounter, currentLevel }: any) {
     </div>
   );
 }
-
-function Question({ beginCounter, currentQuestion }: any) {
-  if (beginCounter !== 0) {
-    return <></>;
-  }
-
-  return (
-    <div className="p-4 my-2 rounded-lg bg-gradient-to-bl from-red-900 via-red-600 to-red-900">
-      <p className="m-0 text-lg select-none">{currentQuestion && currentQuestion.pergunta}</p>
-    </div>
-  );
-}
-
-export default Game;

@@ -1,7 +1,11 @@
 import Link from "next/link";
 import React from "react";
 
-const Home = ({ setGameStarted }: { setGameStarted: (gameStarted: boolean) => void }) => {
+export interface HomeProps {
+  setGameStarted: (gameStarted: boolean) => void;
+}
+
+export function Home({ setGameStarted }: HomeProps): React.ReactElement {
   return (
     <section className="bg-center bg-cover bg-game-background">
       <section className="flex items-center h-screen mx-auto bg-black bg-opacity-75">
@@ -27,6 +31,4 @@ const Home = ({ setGameStarted }: { setGameStarted: (gameStarted: boolean) => vo
       </section>
     </section>
   );
-};
-
-export default Home;
+}

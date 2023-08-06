@@ -1,4 +1,4 @@
-export const RewardPerLevel = [
+export const rewardPerLevel = [
     500,
     1000,
     2000,
@@ -18,4 +18,4 @@ export const RewardPerLevel = [
     1000000,
   ] as const;
   
-export type RewardPerLevelType = typeof RewardPerLevel[number];
+export type RewardPerLevel = typeof rewardPerLevel[number];
