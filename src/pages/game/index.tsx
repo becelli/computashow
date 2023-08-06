@@ -7,7 +7,7 @@ import { IQuestion } from "~/data/questions-per-level/types";
 import { Answer } from "~/pages/game/components/answer";
 import { GameOverModal } from "~/pages/game/components/game-over-modal";
 import { Question } from "~/pages/game/components/question";
-import { GameState } from "~/pages/game/types";
+import { GameState } from "~/pages/game/game-state";
 
 export interface GameProps {
   setGameStarted: (value: boolean) => void;
@@ -26,12 +26,9 @@ export function Game({ setGameStarted }: GameProps) {
   const [beginCounter, setBeginCounter] = useState(3);
 
   const [questionTimer, setQuestionTimer] = useState<number | undefined>(undefined);
-  const [timeToAnswer, setQuestionCounter] = useState(30);
+  const [timeToAnswer, setQuestionCounter] = useState(10);
 
   const [showModal, setShowModal] = useState(false);
-
-  const [gameOver, setGameOver] = useState(false);
-  const [gameWon, setGameWon] = useState(false);
   const [gameState, setGameState] = useState<GameState>(GameState.playing);
 
   const [answerCorrectness, setAnswerCorrectness] = useState(false);
@@ -74,7 +71,7 @@ export function Game({ setGameStarted }: GameProps) {
   // Inicia o contador do tempo do usuário
   const startQuestionTimer = () => {
     clearInterval(questionTimer);
-    setQuestionCounter(30);
+    setQuestionCounter(10);
     // @ts-ignore
     setQuestionTimer(setInterval(() => setQuestionCounter((c) => c - 1), 1000));
   };
@@ -109,7 +106,7 @@ export function Game({ setGameStarted }: GameProps) {
   const nextLevel = () => {
     if (currentLevel === 15) {
       setShowModal(true);
-      setGameWon(true);
+      setGameState(GameState.won);
       confetti({
         particleCount: 200,
       });
@@ -135,7 +132,7 @@ export function Game({ setGameStarted }: GameProps) {
       }, 1500);
     } else {
       // setGameOver(true);
-      setGameState(GameState.gameOver);
+      setGameState(GameState.over);
       setShowModal(true);
     }
   };
@@ -145,39 +142,38 @@ export function Game({ setGameStarted }: GameProps) {
     setQuestionSkipsAvailable((availableSkips) => availableSkips - 1);
     getRandomQuestion(currentLevel);
     startQuestionTimer();
-  };
+  }
 
   if (currentQuestion === null) return null;
 
   // const title = timeToAnswer === 0 ? "Tempo esgotado" : gameOver ? "Resposta errada" : gameWon ? "Você ganhou!!" : "";
-  function getTitle(state: GameState): string {
-    switch (state) {
-      case GameState.gameOver:
+  function getTitle(): string {
+    switch (gameState) {
+      case GameState.over:
         return "Resposta errada";
-      case GameState.gameWon:
+      case GameState.won:
         return "Você ganhou!";
-      case GameState.timeOver:
-        return "Tempo esgotado";
+      default:
+        return "O tempo acabou!";
     }
-    }
-  const title = getTitle(gameState);
+  }
 
   return (
     <section className="flex flex-col justify-between h-screen bg-gradient-to-tl from-black to-black via-blue-900">
       <GameOverModal
-        title={title}
+        title={getTitle()}
         currentLevel={currentLevel}
         setGameStarted={setGameStarted}
         currentQuestion={currentQuestion}
-        gameOver={gameOver}
-        gameWon={gameWon}
+        gameOver={gameState === GameState.over}
+        gameWon={gameState === GameState.won}
         setShowModal={setShowModal}
         showModal={showModal}
         timeToAnswer={timeToAnswer}
       />
 
       <div className="timer-pergunta">{timeToAnswer}</div>
-      <section className="container max-w-lg py-4 mx-auto md:px-4">
+      <section className="container max-w-lg px-4 py-4 mx-auto">
         <div className="mx-auto text-center game-control">
           <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="mx-auto" />
           <CurrentQuestion beginCounter={beginCounter} currentLevel={currentLevel} />
