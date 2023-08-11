@@ -4,149 +4,88 @@ import confetti from "canvas-confetti";
 import { rewardPerLevel } from "~/data/rewards-per-level";
 import { questions } from "~/data/questions-per-level";
 import { IQuestion } from "~/data/questions-per-level/types";
-import { Answer } from "~/pages/game/components/answer";
+import { Answers } from "~/pages/game/components/answer";
 import { GameOverModal } from "~/pages/game/components/game-over-modal";
 import { Question } from "~/pages/game/components/question";
 import { GameState } from "~/pages/game/game-state";
+import { QuestionDifficulty } from "~/data/questions-per-level/question-difficulty";
 
 export interface GameProps {
   setGameStarted: (value: boolean) => void;
 }
 
 export function Game({ setGameStarted }: GameProps) {
-  // States
-  const [easyQuestions, setEasyQuestions] = useState<IQuestion[] | null>(null);
-  const [averageQuestions, setAverageQuestions] = useState<IQuestion[] | null>(null);
-  const [hardQuestions, setHardQuestions] = useState<IQuestion[] | null>(null);
+  const defaultGameStartCounter = 3;
+  const defaultTimeToAnswer = 30;
+  const maxLevel = 15;
+  const waitTime = 1500;
+  const [questionsByLevel, setQuestionsByLevel] = useState(new Map<QuestionDifficulty, IQuestion[]>());
 
-  const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(null);
-  const [currentLevel, setCurrentLevel] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState<IQuestion>({
+    question: "Carregando...",
+    response: 0,
+    difficulty: QuestionDifficulty.easy,
+    options: [],
+  });
 
-  const [beginTimer, setBeginTimer] = useState<number | undefined>(undefined);
-  const [beginCounter, setBeginCounter] = useState(3);
+  const [currentLevel, setCurrentLevel] = useState(1);
+  const levelDifficulty = currentLevel < 6 ? QuestionDifficulty.easy : currentLevel < 11 ? QuestionDifficulty.medium : QuestionDifficulty.hard;
 
-  const [questionTimer, setQuestionTimer] = useState<number | undefined>(undefined);
-  const [timeToAnswer, setQuestionCounter] = useState(10);
+  const [timeToBeginGameLeft, setTimeToBeginGameLeft] = useState<number>(defaultGameStartCounter + 1);
+  const [timeToAnswerLeft, setTimeToAnswerLeft] = useState<number>(-1);
 
-  const [showModal, setShowModal] = useState(false);
-  const [gameState, setGameState] = useState<GameState>(GameState.playing);
+  const [gameState, setGameState] = useState<GameState>(GameState.playing)
 
   const [answerCorrectness, setAnswerCorrectness] = useState(false);
-
   const [questionSkipsAvailable, setQuestionSkipsAvailable] = useState(3);
 
-  const separateQuestionsPerLevel = () => {
-    const question = structuredClone(questions);
-    setEasyQuestions(question.splice(0, 16)); // mudar numero
-    setAverageQuestions(question.splice(0, 13));
-    setHardQuestions(question.splice(0, 10));
-  };
-
-  // Seleciona pergunta aleatoria
-  const getRandomQuestion = (currentLevel: number) => {
-    const levels = [easyQuestions, averageQuestions, hardQuestions];
-    const levelIndex = currentLevel < 6 ? 0 : currentLevel < 11 ? 1 : 2;
-
-    const levelQuestions = levels[levelIndex];
-    if (levelQuestions === null) return;
-    const ArrayQuestions = [...levelQuestions];
-    const randomIndex = Math.floor(Math.random() * ArrayQuestions.length);
-    const question = ArrayQuestions.splice(randomIndex, 1)[0];
-
-    switch (levelIndex) {
-      case 0:
-        setEasyQuestions(ArrayQuestions);
-        break;
-      case 1:
-        setAverageQuestions(ArrayQuestions);
-        break;
-      case 2:
-        setHardQuestions(ArrayQuestions);
-        break;
-    }
-
-    setCurrentQuestion(question);
-  };
-
-  // Inicia o contador do tempo do usuário
-  const startQuestionTimer = () => {
-    clearInterval(questionTimer);
-    setQuestionCounter(10);
-    // @ts-ignore
-    setQuestionTimer(setInterval(() => setQuestionCounter((c) => c - 1), 1000));
-  };
-
-  // Inicia o jogo
-  useEffect(() => {
-    separateQuestionsPerLevel();
-    setCurrentLevel(1);
-    // @ts-ignore
-    setBeginTimer(setInterval(() => setBeginCounter((c) => Math.max(c - 0.5, 0)), 1000));
-
-    return () => clearInterval(beginTimer); // Clear the interval on component unmount
-  }, []);
-
-  // Para os timers se chegarem a zero
-  useEffect(() => {
-    if (beginCounter === 0) {
-      clearInterval(beginTimer);
-      getRandomQuestion(currentLevel);
-      startQuestionTimer();
-    }
-  }, [beginCounter]);
-
-  useEffect(() => {
-    if (timeToAnswer === 0) {
-      clearInterval(questionTimer);
-      setShowModal(true);
-    }
-  }, [timeToAnswer]);
-
-  // Passa de nivel
-  const nextLevel = () => {
-    if (currentLevel === 15) {
-      setShowModal(true);
-      setGameState(GameState.won);
-      confetti({
-        particleCount: 200,
-      });
-    } else {
-      setCurrentLevel((c) => c + 1);
-      getRandomQuestion(currentLevel);
-      startQuestionTimer();
-    }
-  };
-
-  // Responde pergunta
-  const answerQuestion = (answer: number) => {
-    clearInterval(questionTimer);
-
-    if (!currentQuestion) return;
-    const isCorrectAnswer = currentQuestion.response === answer;
-
-    if (isCorrectAnswer) {
-      setAnswerCorrectness(true);
-      setTimeout(() => {
-        setAnswerCorrectness(false);
-        nextLevel();
-      }, 1500);
-    } else {
-      // setGameOver(true);
-      setGameState(GameState.over);
-      setShowModal(true);
-    }
-  };
-
-  // Pula a pergunta
-  function skipQuestion(): void {
-    setQuestionSkipsAvailable((availableSkips) => availableSkips - 1);
-    getRandomQuestion(currentLevel);
-    startQuestionTimer();
+  function separateQuestionsPerLevel() {
+    setQuestionsByLevel(
+      new Map<QuestionDifficulty, IQuestion[]>(
+        Object.values(QuestionDifficulty).map((difficulty) => {
+          const questionsOfDifficulty = questions.filter((question) => question.difficulty === difficulty);
+          return [difficulty, questionsOfDifficulty];
+        }),
+      ),
+    );
   }
 
-  if (currentQuestion === null) return null;
+  async function nextLevel(): Promise<void> {
+    if (currentLevel === maxLevel) {
+      setGameState(GameState.won);
+      await confetti({ particleCount: 200 });
+      return;
+    }
+    const question = getRandomQuestion();
+    setCurrentQuestion(question);
+    setCurrentLevel((currentLevel) => currentLevel + 1);
+    setTimeToAnswerLeft(defaultTimeToAnswer);
+  }
 
-  // const title = timeToAnswer === 0 ? "Tempo esgotado" : gameOver ? "Resposta errada" : gameWon ? "Você ganhou!!" : "";
+  function answerQuestion(answer: number): void {
+    if (!currentQuestion) return;
+
+    if (currentQuestion.response !== answer) {
+      return setGameState(GameState.over);
+    }
+
+    setTimeToAnswerLeft(-1);
+    setAnswerCorrectness(true);
+    setTimeout(() => {
+      setAnswerCorrectness(false);
+      nextLevel();
+    }, waitTime);
+  }
+
+  function skipQuestion(): void {
+    if (questionSkipsAvailable === 0) {
+      return;
+    }
+    setQuestionSkipsAvailable((availableSkips) => availableSkips - 1);
+    const question = getRandomQuestion();
+    setCurrentQuestion(question);
+  }
+
   function getTitle(): string {
     switch (gameState) {
       case GameState.over:
@@ -158,6 +97,56 @@ export function Game({ setGameStarted }: GameProps) {
     }
   }
 
+  // TODO: Subir para componente pai
+  function getRandomQuestion(): IQuestion {
+    const questionsOfLevel = questionsByLevel.get(levelDifficulty) ?? [];
+    const randomIndex = Math.floor(Math.random() * questionsOfLevel.length);
+
+    const returnQuestion = questionsOfLevel[randomIndex];
+    setQuestionsByLevel((questionsByLevel) => {
+      const questionsOfLevel = questionsByLevel.get(levelDifficulty) ?? [];
+      questionsOfLevel.splice(randomIndex, 1);
+      return questionsByLevel.set(levelDifficulty, questionsOfLevel);
+    });
+
+    return returnQuestion;
+  }
+
+  useEffect(() => {
+    separateQuestionsPerLevel();
+    setTimeToBeginGameLeft(timeToBeginGameLeft - 1);
+  }, []);
+
+  useEffect(() => {
+    if (timeToBeginGameLeft === 0) {
+      const question = getRandomQuestion();
+      setCurrentQuestion(question);
+      return setTimeToAnswerLeft(defaultTimeToAnswer);
+    }
+
+    const interval = setInterval(() => {
+      setTimeToBeginGameLeft(timeToBeginGameLeft - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timeToBeginGameLeft]);
+
+  useEffect(() => {
+
+    if (timeToAnswerLeft === -1) {
+      return;
+    }
+    if (timeToAnswerLeft === 0) {
+      return setGameState(GameState.over);
+    }
+
+    const interval = setInterval(() => {
+      setTimeToAnswerLeft(timeToAnswerLeft - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timeToAnswerLeft]);
+
   return (
     <section className="flex flex-col justify-between h-screen bg-gradient-to-tl from-black to-black via-blue-900">
       <GameOverModal
@@ -167,20 +156,19 @@ export function Game({ setGameStarted }: GameProps) {
         currentQuestion={currentQuestion}
         gameOver={gameState === GameState.over}
         gameWon={gameState === GameState.won}
-        setShowModal={setShowModal}
-        showModal={showModal}
-        timeToAnswer={timeToAnswer}
+        setShowModal={() => setGameStarted(false)}
+        showModal={gameState === GameState.over || gameState === GameState.won}
+        timeToAnswer={timeToAnswerLeft}
       />
 
-      <div className="timer-pergunta">{timeToAnswer}</div>
-      <section className="container max-w-lg px-4 py-4 mx-auto">
-        <div className="mx-auto text-center game-control">
-          <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="mx-auto" />
-          <CurrentQuestion beginCounter={beginCounter} currentLevel={currentLevel} />
-          <Question beginCounter={beginCounter} currentQuestion={currentQuestion} />
+        <div className="absolute right-0">{timeToBeginGameLeft !== 0 ? timeToBeginGameLeft : timeToAnswerLeft}</div>
+      <section className="container h-full max-w-lg p-2 mx-auto sm:p-0">
+        <div className="flex flex-col items-center h-full mx-auto text-center">
+          <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="items-center m-auto" />
+          <Question beginCounter={timeToBeginGameLeft} currentQuestion={currentQuestion} currentLevel={currentLevel} />
 
-          {beginCounter === 0 && currentQuestion && (
-            <Answer
+          {timeToBeginGameLeft === 0 && currentQuestion && (
+            <Answers
               answerQuestion={answerQuestion}
               currentQuestion={currentQuestion}
               correctAnswer={answerCorrectness}
@@ -194,16 +182,5 @@ export function Game({ setGameStarted }: GameProps) {
         </div>
       </section>
     </section>
-  );
-}
-
-function CurrentQuestion({ beginCounter, currentLevel }: any) {
-  if (beginCounter !== 0) {
-    return <></>;
-  }
-  return (
-    <div className="cursor-default">
-      <p className="mt-1 text-3xl text-light">Pergunta número {currentLevel}</p>
-    </div>
   );
 }

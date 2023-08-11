@@ -31,12 +31,8 @@ export function GameOverModal({
   const reward = currentLevel === 1 ? "500" : `${(rewardPerLevel[currentLevel] / 2).toString().slice(0, -3)} mil`;
   return (
     <UnclosableModal title={title} showModal={showModal}>
-      <section className="text-black">
-        <div>
-          {/* {timeToAnswer === 0 && `Sinto muito, o seu tempo acabou. A opção correta era: ${correctAnswer}`}
-          <CorrectAnswerField isVisible={gameOver} correctAnswer={correctAnswer} /> */}
-          <GameWonMessage isVisible={gameWon} />
-        </div>
+      <section className="text-black ">
+        <GameWonMessage isVisible={gameWon} />
         <GameOverMessage timeToAnswer={timeToAnswer} isVisible={gameOver} reward={reward} />
         <TryAgainButton setGameStarted={setGameStarted} setShowModal={setShowModal} />
       </section>

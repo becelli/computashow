@@ -13,7 +13,7 @@ export interface AnswerProps {
   correctAnswer: boolean;
 }
 
-export function Answer({
+export function Answers({
   currentLevel,
   rewardPerLevel,
   setGameStarted,
