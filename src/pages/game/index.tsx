@@ -148,7 +148,7 @@ export function Game({ setGameStarted }: GameProps) {
   }, [timeToAnswerLeft]);
 
   return (
-    <section className="flex flex-col justify-between h-screen bg-gradient-to-tl from-black to-black via-blue-900">
+    <section className="flex flex-col h-screen bg-gradient-to-tl from-black to-black via-blue-900">
       <GameOverModal
         title={getTitle()}
         currentLevel={currentLevel}
@@ -161,10 +161,15 @@ export function Game({ setGameStarted }: GameProps) {
         timeToAnswer={timeToAnswerLeft}
       />
 
-        <div className="absolute right-0">{timeToBeginGameLeft !== 0 ? timeToBeginGameLeft : timeToAnswerLeft}</div>
-      <section className="container h-full max-w-lg p-2 mx-auto sm:p-0">
+      <div className="absolute top-4 right-4">
+        <div className="flex items-center justify-center w-12 h-12 text-white bg-gradient-to-bl from-blue-900 via-blue-700 to-blue-900 rounded-full">
+          {timeToBeginGameLeft !== 0 ? timeToBeginGameLeft : timeToAnswerLeft}
+        </div>
+      </div>
+
+      <div className="container h-full max-w-lg p-2 mx-auto sm:p-0">
         <div className="flex flex-col items-center h-full mx-auto text-center">
-          <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="items-center m-auto" />
+          <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="m-auto" />
           <Question beginCounter={timeToBeginGameLeft} currentQuestion={currentQuestion} currentLevel={currentLevel} />
 
           {timeToBeginGameLeft === 0 && currentQuestion && (
@@ -180,7 +185,7 @@ export function Game({ setGameStarted }: GameProps) {
             />
           )}
         </div>
-      </section>
+      </div>
     </section>
   );
 }

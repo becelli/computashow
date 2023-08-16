@@ -13,6 +13,13 @@ export function Question({ beginCounter, currentLevel, currentQuestion }: Questi
   }
 
   return (
+    // <Fragment>
+    //   <CurrentQuestion beginCounter={beginCounter} currentLevel={currentLevel} />
+    //   <div className="p-4 my-2 rounded-lg bg-gradient-to-bl from-amber-800 via-amber-600 to-amber-800" style={{ width: '1000px' }}>
+    //     <p className="m-0 text-lg select-none">{currentQuestion && currentQuestion.question}</p>
+    //   </div>
+    // </Fragment>
+
     <Fragment>
       <CurrentQuestion beginCounter={beginCounter} currentLevel={currentLevel} />
       <div className="p-4 my-2 rounded-lg bg-gradient-to-bl from-amber-800 via-amber-600 to-amber-800">
