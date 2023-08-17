@@ -18,6 +18,6 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/game/Game.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/app/game/Game.js"],
   "exclude": ["node_modules"]
 }

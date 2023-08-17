@@ -4,17 +4,19 @@ import confetti from "canvas-confetti";
 import { rewardPerLevel } from "~/data/rewards-per-level";
 import { questions } from "~/data/questions-per-level";
 import { IQuestion } from "~/data/questions-per-level/types";
-import { Answers } from "~/pages/game/components/answer";
-import { GameOverModal } from "~/pages/game/components/game-over-modal";
-import { Question } from "~/pages/game/components/question";
-import { GameState } from "~/pages/game/game-state";
+import { Answers } from "~/app/game/components/answer";
+import { GameOverModal } from "~/app/game/components/game-over-modal";
+import { Question } from "~/app/game/components/question";
+import { GameState } from "~/app/game/game-state";
 import { QuestionDifficulty } from "~/data/questions-per-level/question-difficulty";
+import { useTranslation } from "~/i18n/hooks/use-translation";
 
 export interface GameProps {
   setGameStarted: (value: boolean) => void;
 }
 
 export function Game({ setGameStarted }: GameProps) {
+  const translation = useTranslation();
   const defaultGameStartCounter = 3;
   const defaultTimeToAnswer = 30;
   const maxLevel = 15;
@@ -22,7 +24,7 @@ export function Game({ setGameStarted }: GameProps) {
   const [questionsByLevel, setQuestionsByLevel] = useState(new Map<QuestionDifficulty, IQuestion[]>());
 
   const [currentQuestion, setCurrentQuestion] = useState<IQuestion>({
-    question: "Carregando...",
+    question: translation.game.loading,
     response: 0,
     difficulty: QuestionDifficulty.easy,
     options: [],
@@ -162,7 +164,7 @@ export function Game({ setGameStarted }: GameProps) {
       />
 
       <div className="absolute top-4 right-4">
-        <div className="flex items-center justify-center w-12 h-12 text-white bg-gradient-to-bl from-blue-900 via-blue-700 to-blue-900 rounded-full">
+        <div className="flex items-center justify-center w-12 h-12 text-white rounded-full bg-gradient-to-bl from-blue-900 via-blue-700 to-blue-900">
           {timeToBeginGameLeft !== 0 ? timeToBeginGameLeft : timeToAnswerLeft}
         </div>
       </div>
