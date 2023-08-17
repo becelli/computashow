@@ -2,25 +2,22 @@ import { Fragment } from "react";
 import { UnclosableModal } from "~/components/unclosable-modal";
 import { IQuestion } from "~/data/questions-per-level/types";
 import { rewardPerLevel } from "~/data/rewards-per-level";
+import { GameState } from "~/app/game/entities/game-state";
 
 export function GameOverModal({
   title,
-  showModal,
+  gameState,
   setShowModal,
   currentQuestion,
   timeToAnswer,
-  gameOver,
-  gameWon,
   currentLevel,
   setGameStarted,
 }: {
   title: string;
-  showModal: boolean;
   setShowModal: any;
   currentQuestion: IQuestion | null;
   timeToAnswer: number;
-  gameOver: boolean;
-  gameWon: boolean;
+  gameState: GameState;
   currentLevel: number;
   setGameStarted: (value: boolean) => void;
 }) {
@@ -30,10 +27,10 @@ export function GameOverModal({
   const correctAnswer = currentQuestion.options[currentQuestion.response - 1];
   const reward = currentLevel === 1 ? "500" : `${(rewardPerLevel[currentLevel] / 2).toString().slice(0, -3)} mil`;
   return (
-    <UnclosableModal title={title} showModal={showModal}>
+    <UnclosableModal title={title} showModal={gameState === GameState.over || gameState === GameState.won}>
       <section className="text-black ">
-        <GameWonMessage isVisible={gameWon} />
-        <GameOverMessage timeToAnswer={timeToAnswer} isVisible={gameOver} reward={reward} />
+        <GameWonMessage isVisible={gameState === GameState.won} />
+        <GameOverMessage timeToAnswer={timeToAnswer} reward={reward} isVisible={gameState === GameState.over} />
         <TryAgainButton setGameStarted={setGameStarted} setShowModal={setShowModal} />
       </section>
     </UnclosableModal>

@@ -2,11 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { useTranslation } from "~/i18n/hooks/use-translation";
 
-export interface HomeProps {
-  setGameStarted: (gameStarted: boolean) => void;
-}
-
-export default function Home({ setGameStarted }: HomeProps): React.ReactElement {
+export default function Home(): React.ReactElement {
   const translation = useTranslation();
   return (
     <section className="bg-center bg-cover bg-game-background">
@@ -26,9 +22,11 @@ export default function Home({ setGameStarted }: HomeProps): React.ReactElement 
               {translation.home.forTheDisciplineOfFPGA}
             </p>
           </div>
-          <button onClick={() => setGameStarted(true)} className="w-full p-5 mt-3 duration-150 bg-red-700 hover:bg-red-900 rounded-3xl">
-            <span className="text-2xl font-bold text-white">{translation.home.startButton}</span>
-          </button>
+          <Link href="/singleplayer">
+            <button className="w-full p-5 mt-3 duration-150 bg-red-700 hover:bg-red-900 rounded-3xl">
+              <span className="text-2xl font-bold text-white">{translation.home.singlePlayer}</span>
+            </button>
+          </Link>
         </div>
       </section>
     </section>
