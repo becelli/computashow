@@ -1,13 +1,13 @@
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import confetti from "canvas-confetti";
-import { rewardPerLevel } from "~/data/rewards-per-level";
-import { IQuestion } from "~/data/questions-per-level/types";
-import { Answers } from "~/app/game/components/answer";
+import React, { Fragment } from "react";
+
+import { Answers } from "~/app/game/components/answers";
+import { Countdown } from "~/app/game/components/countdown";
 import { GameOverModal } from "~/app/game/components/game-over-modal";
 import { Question } from "~/app/game/components/question";
 import { GameState } from "~/app/game/entities/game-state";
-import { useTranslation } from "~/i18n/hooks/use-translation";
+import { IQuestion } from "~/data/questions-per-level/types";
+import { rewardPerLevel } from "~/data/rewards-per-level";
 
 export interface GameProps {
   currentQuestion: IQuestion;
@@ -34,42 +34,17 @@ export default function Game({
   skipQuestion,
   leave,
 }: GameProps): React.ReactElement {
-  const translation = useTranslation();
+  function PlayingGame(): React.ReactElement {
+    return (
+      <Fragment>
+        {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} restartGame={leave} gameState={gameState} />}
 
-  function getGameOverTitle(): string {
-    switch (gameState) {
-      case GameState.over:
-        return translation.game.gameState.over;
-      case GameState.won:
-        return translation.game.gameState.won;
-      case GameState.playing: // if "playing", the time has exceeded the limit
-        return translation.game.gameState.playing;
-    }
-  }
+        <Countdown timer={timeToAnswerLeft} />
+        <div className="container w-full h-full p-2 mx-auto sm:p-0">
+          <div className="flex flex-col items-center h-full mx-auto text-center ">
+            <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="m-auto" />
+            <Question currentQuestion={currentQuestion} currentLevel={currentLevel} />
 
-  if (timeToBeginGameLeft > 0) {
-    return <Countdown timer={timeToBeginGameLeft} />;
-  }
-
-  return (
-    <section className="flex flex-col h-screen bg-gradient-to-tl from-black to-black via-blue-900">
-      <GameOverModal
-        title={getGameOverTitle()}
-        currentLevel={currentLevel}
-        setGameStarted={leave}
-        currentQuestion={currentQuestion}
-        gameState={gameState}
-        setShowModal={() => leave()}
-        timeToAnswer={timeToAnswerLeft}
-      />
-
-      <Countdown timer={timeToAnswerLeft} />
-      <div className="container h-full max-w-lg p-2 mx-auto sm:p-0">
-        <div className="flex flex-col items-center h-full mx-auto text-center">
-          <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="m-auto" />
-          <Question beginCounter={timeToBeginGameLeft} currentQuestion={currentQuestion} currentLevel={currentLevel} />
-
-          {timeToBeginGameLeft === 0 && currentQuestion && (
             <Answers
               answerQuestion={answerQuestion}
               currentQuestion={currentQuestion}
@@ -80,17 +55,19 @@ export default function Game({
               rewardPerLevel={rewardPerLevel}
               setGameStarted={leave}
             />
-          )}
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </Fragment>
+    );
+  }
 
-function Countdown({ timer }: { timer: number | string }) {
+  function StartingGame(): React.ReactElement {
+    return <Countdown timer={timeToBeginGameLeft} />;
+  }
+
   return (
-    <div className="absolute top-4 right-4">
-      <div className="flex items-center justify-center w-12 h-12 text-white rounded-full bg-gradient-to-bl from-blue-900 via-blue-700 to-blue-900">{timer}</div>
-    </div>
+    <main className="flex flex-col min-h-screen bg-gradient-to-tl from-black to-black via-blue-900">
+      {timeToBeginGameLeft === 0 ? <PlayingGame /> : <StartingGame />}
+    </main>
   );
 }

@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import confetti from "canvas-confetti";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
 import Game from "~/app/game";
 import { GameState } from "~/app/game/entities/game-state";
 import { questions } from "~/data/questions-per-level";
 import { QuestionDifficulty } from "~/data/questions-per-level/question-difficulty";
 import { IQuestion } from "~/data/questions-per-level/types";
 import { useTranslation } from "~/i18n/hooks/use-translation";
-
-
 
 export default function SingleplayerGame(): React.ReactElement {
   const router = useRouter();
@@ -61,17 +61,16 @@ export default function SingleplayerGame(): React.ReactElement {
   }
 
   function answerQuestion(answer: number): void {
-    if (!currentQuestion) return;
-
     if (currentQuestion.response !== answer) {
-      return setGameState(GameState.over);
+      setGameState(GameState.over);
+      return;
     }
 
     setTimeToAnswerLeft(-1);
     setAnswerCorrectness(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       setAnswerCorrectness(false);
-      nextLevel();
+      await nextLevel();
     }, waitTime);
   }
 
@@ -82,10 +81,11 @@ export default function SingleplayerGame(): React.ReactElement {
     setQuestionSkipsAvailable((availableSkips) => availableSkips - 1);
     const question = getRandomQuestion();
     setCurrentQuestion(question);
+    setTimeToAnswerLeft(defaultTimeToAnswer);
   }
 
-
   // TODO: Subir para componente pai
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function getRandomQuestion(): IQuestion {
     const questionsOfLevel = questionsByLevel.get(levelDifficulty) ?? [];
     const randomIndex = Math.floor(Math.random() * questionsOfLevel.length);
@@ -103,20 +103,25 @@ export default function SingleplayerGame(): React.ReactElement {
   useEffect(() => {
     separateQuestionsPerLevel();
     setTimeToBeginGameLeft(timeToBeginGameLeft - 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (timeToBeginGameLeft === 0) {
       const question = getRandomQuestion();
       setCurrentQuestion(question);
-      return setTimeToAnswerLeft(defaultTimeToAnswer);
+      setTimeToAnswerLeft(defaultTimeToAnswer);
+      return;
     }
 
     const interval = setInterval(() => {
       setTimeToBeginGameLeft(timeToBeginGameLeft - 1);
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeToBeginGameLeft]);
 
   useEffect(() => {
@@ -124,18 +129,21 @@ export default function SingleplayerGame(): React.ReactElement {
       return;
     }
     if (timeToAnswerLeft === 0) {
-      return setGameState(GameState.over);
+      setGameState(GameState.over);
+      return;
     }
 
     const interval = setInterval(() => {
       setTimeToAnswerLeft(timeToAnswerLeft - 1);
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, [timeToAnswerLeft]);
 
-  function leaveGame(): void {
-    router.push("/");
+  async function leaveGame(): Promise<void> {
+    await router.push("/");
   }
   return (
     <Game
@@ -148,7 +156,7 @@ export default function SingleplayerGame(): React.ReactElement {
       gameState={gameState}
       answerCorrectness={answerCorrectness}
       questionSkipsAvailable={questionSkipsAvailable}
-      leave={() => leaveGame()}
+      leave={leaveGame}
     />
   );
 }

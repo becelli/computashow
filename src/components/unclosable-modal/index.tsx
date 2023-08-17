@@ -1,4 +1,5 @@
 import React from "react";
+
 import { UnclosableModalProps } from "~/components/unclosable-modal/types";
 
 export function UnclosableModal({ showModal, title, children }: UnclosableModalProps) {

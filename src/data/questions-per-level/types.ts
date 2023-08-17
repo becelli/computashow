@@ -5,4 +5,4 @@ export interface IQuestion {
   options: string[];
   difficulty: QuestionDifficulty;
   response: number;
-};
+}

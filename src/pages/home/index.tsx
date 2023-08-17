@@ -1,12 +1,13 @@
 import Link from "next/link";
 import React from "react";
+
 import { useTranslation } from "~/i18n/hooks/use-translation";
 
 export default function Home(): React.ReactElement {
   const translation = useTranslation();
   return (
     <section className="bg-center bg-cover bg-game-background">
-      <section className="flex items-center h-screen mx-auto bg-black bg-opacity-75">
+      <section className="flex items-center min-h-screen mx-auto bg-black bg-opacity-75">
         <div className="items-center max-w-xs mx-auto">
           <div>
             <h1 className="text-4xl font-bold text-center">{translation.home.welcomeMessage}</h1>
