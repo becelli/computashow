@@ -10,7 +10,7 @@ import { QuestionDifficulty } from "~/data/questions-per-level/question-difficul
 import { IQuestion } from "~/data/questions-per-level/types";
 import { useTranslation } from "~/i18n/hooks/use-translation";
 
-export default function SingleplayerGame(): React.ReactElement {
+export default function SinglePlayerGame(): React.ReactElement {
   const router = useRouter();
   const translation = useTranslation();
   const defaultGameStartCounter = 3;
@@ -129,7 +129,7 @@ export default function SingleplayerGame(): React.ReactElement {
       return;
     }
     if (timeToAnswerLeft === 0) {
-      setGameState(GameState.over);
+      // setGameState(GameState.over);
       return;
     }
 

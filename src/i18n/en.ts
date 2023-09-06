@@ -15,5 +15,11 @@ export const en: Translation = {
       won: "You won!",
       playing: "Time's up!",
     },
+    actions: {
+      stop: "Stop",
+      hit: "Hit",
+      miss: "Miss",
+    },
+    questionLabel: "Question #",
   },
 };

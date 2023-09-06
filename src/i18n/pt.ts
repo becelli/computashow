@@ -1,6 +1,4 @@
-import { Translation } from "~/i18n";
-
-export const pt: Translation = {
+export const pt = {
   gameName: "ComputaShow",
   home: {
     welcomeMessage: "Boas vindas ao ComputaShow!",
@@ -15,5 +13,12 @@ export const pt: Translation = {
       won: "Você venceu!",
       playing: "O tempo acabou!",
     },
+    actions: {
+      stop: "Parar",
+      hit: "Acertar",
+      miss: "Errar",
+      skip: "Pular",
+    },
+    questionLabel: "Pergunta #",
   },
 };
