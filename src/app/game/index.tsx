@@ -8,6 +8,8 @@ import { Question } from "~/app/game/components/question";
 import { GameState } from "~/app/game/entities/game-state";
 import { IQuestion } from "~/data/questions-per-level/types";
 import { rewardPerLevel } from "~/data/rewards-per-level";
+import { StopButton } from "./components/answers/game-actions/stop-button";
+import { SkipQuestion } from "./components/answers/skip-question";
 
 export interface GameProps {
   currentQuestion: IQuestion;
@@ -36,13 +38,13 @@ export default function Game({
 }: GameProps): React.ReactElement {
   function PlayingGame(): React.ReactElement {
     return (
-      <Fragment>
+      <main className="flex flex-col items-center justify-center h-screen">
         {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} restartGame={leave} gameState={gameState} />}
 
-        <Countdown timer={timeToAnswerLeft} />
+        <Countdown timer={timeToAnswerLeft} initialTime={30} />
         <div className="container w-full h-full p-2 mx-auto sm:p-0">
           <div className="flex flex-col items-center h-full mx-auto text-center ">
-            <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="m-auto" />
+            {/* <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="m-auto" /> */}
             <Question currentQuestion={currentQuestion} currentLevel={currentLevel} />
 
             <Answers
@@ -57,17 +59,25 @@ export default function Game({
             />
           </div>
         </div>
-      </Fragment>
+        <div className="flex w-full gap-2 p-5">
+          <SkipQuestion passQuestion={skipQuestion} passQuestionAvailable={questionSkipsAvailable} />
+          <StopButton
+            stopGame={() => {
+              leave();
+            }}
+          />
+        </div>
+      </main>
     );
   }
 
   function StartingGame(): React.ReactElement {
-    return <Countdown timer={timeToBeginGameLeft} />;
+    return (
+      <main className="flex flex-col items-center justify-center h-screen">
+        <Countdown timer={timeToBeginGameLeft} initialTime={3} />
+      </main>
+    );
   }
 
-  return (
-    <main className="flex flex-col min-h-screen bg-gradient-to-tl from-black to-black via-blue-900">
-      {timeToBeginGameLeft === 0 ? <PlayingGame /> : <StartingGame />}
-    </main>
-  );
+  return <main className="flex flex-col min-h-screen bg-white">{timeToBeginGameLeft === 0 ? <PlayingGame /> : <StartingGame />}</main>;
 }

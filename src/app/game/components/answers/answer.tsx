@@ -9,9 +9,9 @@ interface QuestionAnswerProps {
 export function Answer({ option, number, answerQuestion, correctAnswer, response }: QuestionAnswerProps) {
   function getBackgroundColor(number: number, correctAnswer: boolean) {
     if (correctAnswer && number === response) {
-      return "bg-gradient-to-bl from-green-900 via-green-700 to-green-900";
+      return "from-green-900 via-green-700 to-green-900";
     }
-    return "bg-gradient-to-bl from-red-900 via-red-600 to-red-900";
+    return "bg-gray-100 border-2 border-gray-300 hover:bg-gray-200 shadow-sm";
   }
 
   function onClick() {

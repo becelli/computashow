@@ -1,7 +1,7 @@
-import { QuestionDifficulty } from "./question-difficulty";
-import { IQuestion } from "./types";
+import { QuestionDifficulty } from "~/data/questions/question-difficulty";
+import { IQuestion } from "~/data/questions-per-level/types";
 
-export const questions: IQuestion[] = [
+export const computerArchitectureQuestions: IQuestion[] = [
   {
     question: "O que é um circuito digital?",
     options: [

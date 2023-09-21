@@ -13,10 +13,9 @@ export function Question({ currentLevel, currentQuestion }: QuestionProps) {
   return (
     <Fragment>
       <div className="cursor-default">
-        {/* <p className="mt-1 text-3xl text-light">Pergunta #{currentLevel}</p> */}
         <p className="mt-1 text-3xl text-light">{`${translation.game.questionLabel}${currentLevel}`}</p>
       </div>
-      <div className="p-4 my-2 rounded-lg bg-gradient-to-bl from-amber-800 via-amber-600 to-amber-800">
+      <div className="p-4 my-2 bg-gray-100 border-2 border-gray-300 rounded-lg bg-gradient-to-bl">
         <p className="m-0 text-lg select-none">{currentQuestion.question}</p>
       </div>
     </Fragment>

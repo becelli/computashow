@@ -20,7 +20,7 @@ export function GameOverModal({ gameState, currentLevel, restartGame }: { gameSt
 
   return (
     <UnclosableModal title={getGameOverTitle()} showModal={true}>
-      <section className="text-black">
+      <section>
         <Message gameState={gameState} currentLevel={currentLevel} />
         <TryAgainButton tryAgain={restartGame} />
       </section>

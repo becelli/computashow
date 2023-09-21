@@ -1,17 +1,16 @@
 import { Fragment } from "react";
 
+import ProgressCounter from "~/app/game/components/progress-bar";
+
 interface CountdownProps {
   timer: number;
+  initialTime: number;
 }
 
-export function Countdown({ timer }: CountdownProps): React.ReactElement {
+export function Countdown({ timer, initialTime }: CountdownProps): React.ReactElement {
   if (timer === -1) {
     return <Fragment />;
   }
 
-  return (
-    <div className="absolute top-4 right-4">
-      <div className="flex items-center justify-center w-12 h-12 text-white rounded-full bg-gradient-to-bl from-blue-900 via-blue-700 to-blue-900">{timer}</div>
-    </div>
-  );
+  return <ProgressCounter timer={timer} initialTime={initialTime} />;
 }

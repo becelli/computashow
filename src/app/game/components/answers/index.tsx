@@ -5,6 +5,7 @@ import { GameActions } from "~/app/game/components/answers/game-actions";
 import { SkipQuestion } from "~/app/game/components/answers/skip-question";
 import { IQuestion } from "~/data/questions-per-level/types";
 import { RewardPerLevel } from "~/data/rewards-per-level";
+import { StopButton } from "./game-actions/stop-button";
 
 export interface AnswerProps {
   currentLevel: number;
@@ -17,22 +18,9 @@ export interface AnswerProps {
   correctAnswer: boolean;
 }
 
-export function Answers({
-  currentLevel,
-  rewardPerLevel,
-  setGameStarted,
-  currentQuestion,
-  answerQuestion,
-  passQuestion,
-  passQuestionAvailable,
-  correctAnswer,
-}: AnswerProps) {
-  function stopGame() {
-    setGameStarted(false);
-  }
-
+export function Answers({ currentQuestion, answerQuestion, correctAnswer }: AnswerProps) {
   return (
-    <Fragment>
+    <div className="">
       <div className="grid w-full md:gap-4 md:grid-cols-2">
         {currentQuestion.options.map((option: string, number: number) => (
           <Answer
@@ -45,9 +33,6 @@ export function Answers({
           />
         ))}
       </div>
-
-      <SkipQuestion passQuestion={passQuestion} passQuestionAvailable={passQuestionAvailable} />
-      <GameActions currentLevel={currentLevel} stopGame={stopGame} rewardPerLevel={rewardPerLevel} />
-    </Fragment>
+    </div>
   );
 }

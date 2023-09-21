@@ -8,19 +8,12 @@ interface SkipQuestionProps {
 export function SkipQuestion({ passQuestion, passQuestionAvailable }: SkipQuestionProps) {
   const translation = useTranslation();
   return (
-    <div className="mt-4 row">
-      <div className="max-w-xs mx-auto col">
-        <div className="text-center">
-          {passQuestionAvailable > 0 && (
-            <button
-              className="px-6 py-3 text-white rounded-lg bg-gradient-to-bl from-yellow-900 via-yellow-700 to-yellow-900 hover:from-yellow-800 hover:to-yellow-800"
-              onClick={passQuestion}
-            >
-              {`${translation.game.actions.skip} (${passQuestionAvailable})`}
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
+    <button
+      className="w-full px-6 py-3 text-white duration-150 bg-yellow-500 rounded-md md:w-1/2 hover:bg-yellow-800 disabled:bg-gray-300 disabled:text-gray-400"
+      onClick={passQuestion}
+      disabled={passQuestionAvailable === 0}
+    >
+      {`${translation.game.actions.skip} (${passQuestionAvailable})`}
+    </button>
   );
 }

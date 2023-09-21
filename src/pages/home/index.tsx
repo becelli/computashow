@@ -6,8 +6,8 @@ import { useTranslation } from "~/i18n/hooks/use-translation";
 export default function Home(): React.ReactElement {
   const translation = useTranslation();
   return (
-    <section className="bg-center bg-cover bg-game-background">
-      <section className="flex items-center min-h-screen mx-auto bg-black bg-opacity-75">
+    <section className="bg-white">
+      <section className="flex items-center min-h-screen mx-auto via-green-900 from-black to-black">
         <div className="items-center max-w-xs mx-auto">
           <div>
             <h1 className="text-4xl font-bold text-center">{translation.home.welcomeMessage}</h1>
@@ -23,6 +23,8 @@ export default function Home(): React.ReactElement {
               {translation.home.forTheDisciplineOfFPGA}
             </p>
           </div>
+          {/* switch the question theme: os, computer architecture... etc */}
+
           <Link href="/singleplayer">
             <button className="w-full p-5 mt-3 duration-150 bg-red-700 hover:bg-red-900 rounded-3xl">
               <span className="text-2xl font-bold text-white">{translation.home.singlePlayer}</span>
