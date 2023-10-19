@@ -21,4 +21,8 @@ export const pt = {
     },
     questionLabel: "Pergunta #",
   },
+  topics: {
+    computerArchitecture: "Arquitetura de Computadores",
+    operatingSystems: "Sistemas Operacionais",
+  },
 };

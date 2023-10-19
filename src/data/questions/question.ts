@@ -1,8 +1,8 @@
 import { QuestionDifficulty } from "~/data/questions/question-difficulty";
 
 export interface Question {
-  question: string;
-  options: string[];
+  predicate: string;
+  answers: string[];
   difficulty: QuestionDifficulty;
-  response: number;
+  correctResponse: number;
 }

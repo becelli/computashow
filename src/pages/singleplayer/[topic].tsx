@@ -5,41 +5,47 @@ import { useEffect, useState } from "react";
 
 import Game from "~/app/game";
 import { GameState } from "~/app/game/entities/game-state";
-import { questions } from "~/data/questions-per-level";
-import { QuestionDifficulty } from "~/data/questions-per-level/question-difficulty";
-import { IQuestion } from "~/data/questions-per-level/types";
+import { Question } from "~/data/questions/question";
+import { calculateQuestionDifficulty, QuestionDifficulty } from "~/data/questions/question-difficulty";
+import { useQuestionTopic } from "~/data/questions/topic";
 import { useTranslation } from "~/i18n/hooks/use-translation";
 
 export default function SinglePlayerGame(): React.ReactElement {
+  // Set up the translation and questions
   const router = useRouter();
+  const questions = useQuestionTopic(router.query.topic);
   const translation = useTranslation();
+
+  // Define default settings
   const defaultGameStartCounter = 3;
   const defaultTimeToAnswer = 30;
+  const defaultQuestionSkipsAvailable = 3;
   const maxLevel = 15;
   const waitTime = 1500;
-  const [questionsByLevel, setQuestionsByLevel] = useState(new Map<QuestionDifficulty, IQuestion[]>());
 
-  const [currentQuestion, setCurrentQuestion] = useState<IQuestion>({
-    question: translation.game.loading,
-    response: 0,
+  const [questionSkipsAvailable, setQuestionSkipsAvailable] = useState(defaultQuestionSkipsAvailable);
+  const [questionsByLevel, setQuestionsByLevel] = useState(new Map<QuestionDifficulty, Question[]>());
+
+  const [currentQuestion, setCurrentQuestion] = useState<Question>({
+    predicate: translation.game.loading,
+    correctResponse: 0,
     difficulty: QuestionDifficulty.easy,
-    options: [],
+    answers: [],
   });
 
-  const [currentLevel, setCurrentLevel] = useState(1);
-  const levelDifficulty = currentLevel < 6 ? QuestionDifficulty.easy : currentLevel < 11 ? QuestionDifficulty.medium : QuestionDifficulty.hard;
+  const [currentLevel, setCurrentLevel] = useState(0);
+  const levelDifficulty = calculateQuestionDifficulty(currentLevel, maxLevel);
 
-  const [timeToBeginGameLeft, setTimeToBeginGameLeft] = useState<number>(defaultGameStartCounter + 1);
-  const [timeToAnswerLeft, setTimeToAnswerLeft] = useState<number>(-1);
+  const [timeToBeginGameLeft, setTimeToBeginGameLeft] = useState(defaultGameStartCounter + 1);
+  const [timeToAnswerLeft, setTimeToAnswerLeft] = useState(-1);
 
-  const [gameState, setGameState] = useState<GameState>(GameState.playing);
+  const [gameState, setGameState] = useState(GameState.playing);
 
   const [answerCorrectness, setAnswerCorrectness] = useState(false);
-  const [questionSkipsAvailable, setQuestionSkipsAvailable] = useState(3);
 
   function separateQuestionsPerLevel() {
     setQuestionsByLevel(
-      new Map<QuestionDifficulty, IQuestion[]>(
+      new Map<QuestionDifficulty, Question[]>(
         Object.values(QuestionDifficulty).map((difficulty) => {
           const questionsOfDifficulty = questions.filter((question) => question.difficulty === difficulty);
           return [difficulty, questionsOfDifficulty];
@@ -48,11 +54,10 @@ export default function SinglePlayerGame(): React.ReactElement {
     );
   }
 
-  async function nextLevel(): Promise<void> {
+  async function nextLevel() {
     if (currentLevel === maxLevel) {
       setGameState(GameState.won);
-      await confetti({ particleCount: 200 });
-      return;
+      return confetti({ particleCount: 200 });
     }
     const question = getRandomQuestion();
     setCurrentQuestion(question);
@@ -60,10 +65,9 @@ export default function SinglePlayerGame(): React.ReactElement {
     setTimeToAnswerLeft(defaultTimeToAnswer);
   }
 
-  function answerQuestion(answer: number): void {
-    if (currentQuestion.response !== answer) {
-      setGameState(GameState.over);
-      return;
+  function answerQuestion(answer: number) {
+    if (currentQuestion.correctResponse !== answer) {
+      return setGameState(GameState.over);
     }
 
     setTimeToAnswerLeft(-1);
@@ -74,7 +78,7 @@ export default function SinglePlayerGame(): React.ReactElement {
     }, waitTime);
   }
 
-  function skipQuestion(): void {
+  function skipQuestion() {
     if (questionSkipsAvailable === 0) {
       return;
     }
@@ -84,9 +88,7 @@ export default function SinglePlayerGame(): React.ReactElement {
     setTimeToAnswerLeft(defaultTimeToAnswer);
   }
 
-  // TODO: Subir para componente pai
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  function getRandomQuestion(): IQuestion {
+  function getRandomQuestion() {
     const questionsOfLevel = questionsByLevel.get(levelDifficulty) ?? [];
     const randomIndex = Math.floor(Math.random() * questionsOfLevel.length);
 
@@ -98,6 +100,10 @@ export default function SinglePlayerGame(): React.ReactElement {
     });
 
     return returnQuestion;
+  }
+
+  async function leaveGame(): Promise<void> {
+    await router.push("/");
   }
 
   useEffect(() => {
@@ -129,6 +135,7 @@ export default function SinglePlayerGame(): React.ReactElement {
       return;
     }
     if (timeToAnswerLeft === 0) {
+      // TODO: Activate this
       // setGameState(GameState.over);
       return;
     }
@@ -142,9 +149,6 @@ export default function SinglePlayerGame(): React.ReactElement {
     };
   }, [timeToAnswerLeft]);
 
-  async function leaveGame(): Promise<void> {
-    await router.push("/");
-  }
   return (
     <Game
       answerQuestion={answerQuestion}

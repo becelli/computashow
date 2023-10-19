@@ -12,6 +12,7 @@
   },
   "plugins": ["@typescript-eslint", "simple-import-sort", "prettier"],
   "rules": {
+    "@typescript-eslint/no-confusing-void-expression": "off",
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "eqeqeq": "error",
     "no-else-return": "error",

@@ -1,18 +1,16 @@
-import Image from "next/image";
-import React, { Fragment } from "react";
+import React from "react";
 
 import { Answers } from "~/app/game/components/answers";
+import { StopButton } from "~/app/game/components/answers/game-actions/stop-button";
+import { SkipQuestion } from "~/app/game/components/answers/skip-question";
 import { Countdown } from "~/app/game/components/countdown";
 import { GameOverModal } from "~/app/game/components/game-over-modal";
-import { Question } from "~/app/game/components/question";
+import { Question as QuestionComponent } from "~/app/game/components/question";
 import { GameState } from "~/app/game/entities/game-state";
-import { IQuestion } from "~/data/questions-per-level/types";
-import { rewardPerLevel } from "~/data/rewards-per-level";
-import { StopButton } from "./components/answers/game-actions/stop-button";
-import { SkipQuestion } from "./components/answers/skip-question";
+import { Question } from "~/data/questions/question";
 
 export interface GameProps {
-  currentQuestion: IQuestion;
+  currentQuestion: Question;
   currentLevel: number;
   timeToBeginGameLeft: number;
   timeToAnswerLeft: number;
@@ -36,7 +34,7 @@ export default function Game({
   skipQuestion,
   leave,
 }: GameProps): React.ReactElement {
-  function PlayingGame(): React.ReactElement {
+  function PlayingGame() {
     return (
       <main className="flex flex-col items-center justify-center h-screen">
         {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} restartGame={leave} gameState={gameState} />}
@@ -44,19 +42,9 @@ export default function Game({
         <Countdown timer={timeToAnswerLeft} initialTime={30} />
         <div className="container w-full h-full p-2 mx-auto sm:p-0">
           <div className="flex flex-col items-center h-full mx-auto text-center ">
-            {/* <Image src="/logo.png" alt="Show do Milhão" width={240} height={240} className="m-auto" /> */}
-            <Question currentQuestion={currentQuestion} currentLevel={currentLevel} />
+            <QuestionComponent currentQuestion={currentQuestion} currentLevel={currentLevel} />
 
-            <Answers
-              answerQuestion={answerQuestion}
-              currentQuestion={currentQuestion}
-              correctAnswer={answerCorrectness}
-              currentLevel={currentLevel}
-              passQuestion={skipQuestion}
-              passQuestionAvailable={questionSkipsAvailable}
-              rewardPerLevel={rewardPerLevel}
-              setGameStarted={leave}
-            />
+            <Answers answerQuestion={answerQuestion} correctAnswer={answerCorrectness} currentQuestion={currentQuestion} />
           </div>
         </div>
         <div className="flex w-full gap-2 p-5">
@@ -71,7 +59,7 @@ export default function Game({
     );
   }
 
-  function StartingGame(): React.ReactElement {
+  function StartingGame() {
     return (
       <main className="flex flex-col items-center justify-center h-screen">
         <Countdown timer={timeToBeginGameLeft} initialTime={3} />
@@ -79,5 +67,6 @@ export default function Game({
     );
   }
 
-  return <main className="flex flex-col min-h-screen bg-white">{timeToBeginGameLeft === 0 ? <PlayingGame /> : <StartingGame />}</main>;
+  const gameComponent = timeToAnswerLeft === 0 ? <PlayingGame /> : <StartingGame />;
+  return <main className="flex flex-col min-h-screen bg-white">{gameComponent}</main>;
 }
