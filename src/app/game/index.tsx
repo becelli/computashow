@@ -39,21 +39,16 @@ export default function Game({
       <main className="flex flex-col items-center justify-center h-screen">
         {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} restartGame={leave} gameState={gameState} />}
 
-        <Countdown timer={timeToAnswerLeft} initialTime={30} />
+        <Countdown timer={timeToAnswerLeft} />
         <div className="container w-full h-full p-2 mx-auto sm:p-0">
           <div className="flex flex-col items-center h-full mx-auto text-center ">
             <QuestionComponent currentQuestion={currentQuestion} currentLevel={currentLevel} />
-
             <Answers answerQuestion={answerQuestion} correctAnswer={answerCorrectness} currentQuestion={currentQuestion} />
           </div>
         </div>
         <div className="flex w-full gap-2 p-5">
           <SkipQuestion passQuestion={skipQuestion} passQuestionAvailable={questionSkipsAvailable} />
-          <StopButton
-            stopGame={() => {
-              leave();
-            }}
-          />
+          <StopButton stopGame={leave} />
         </div>
       </main>
     );
@@ -62,11 +57,10 @@ export default function Game({
   function StartingGame() {
     return (
       <main className="flex flex-col items-center justify-center h-screen">
-        <Countdown timer={timeToBeginGameLeft} initialTime={3} />
+        <Countdown timer={timeToBeginGameLeft} />
       </main>
     );
   }
 
-  const gameComponent = timeToAnswerLeft === 0 ? <PlayingGame /> : <StartingGame />;
-  return <main className="flex flex-col min-h-screen bg-white">{gameComponent}</main>;
+  return <main className="flex flex-col min-h-screen bg-white">{timeToBeginGameLeft === 0 ? <PlayingGame /> : <StartingGame />}</main>;
 }

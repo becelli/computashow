@@ -1,16 +1,15 @@
 import { Fragment } from "react";
 
-import ProgressCounter from "~/app/game/components/progress-bar";
+import ProgressCounter from "~/app/game/components/progress-counter";
 
 interface CountdownProps {
   timer: number;
-  initialTime: number;
 }
 
-export function Countdown({ timer, initialTime }: CountdownProps): React.ReactElement {
+export function Countdown({ timer }: CountdownProps): React.ReactElement {
   if (timer === -1) {
     return <Fragment />;
   }
 
-  return <ProgressCounter timer={timer} initialTime={initialTime} />;
+  return <ProgressCounter timer={timer} />;
 }

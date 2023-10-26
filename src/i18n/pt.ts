@@ -1,7 +1,9 @@
 export const pt = {
   gameName: "ComputaShow",
   home: {
-    welcomeMessage: "Boas vindas ao ComputaShow!",
+    and: "e",
+    welcome: "Boas vindas ao ComputaShow!",
+    welcomeMessage: "O ComputaShow é um jogo de perguntas e respostas sobre os assuntos de Arquitetura de Computadores e Sistemas Operacionais.",
     singlePlayer: "Jogar",
     projectDevelopedBy: "Este projeto foi desenvolvido por ",
     forTheDisciplineOfFPGA: " para a disciplina de FPGA.",

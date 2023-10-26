@@ -21,8 +21,9 @@ export default function SinglePlayerGame(): React.ReactElement {
   const defaultTimeToAnswer = 30;
   const defaultQuestionSkipsAvailable = 3;
   const maxLevel = 15;
-  const waitTime = 1500;
+  const waitTime = 2000;
 
+  // Set up the game state
   const [questionSkipsAvailable, setQuestionSkipsAvailable] = useState(defaultQuestionSkipsAvailable);
   const [questionsByLevel, setQuestionsByLevel] = useState(new Map<QuestionDifficulty, Question[]>());
 
@@ -54,10 +55,25 @@ export default function SinglePlayerGame(): React.ReactElement {
     );
   }
 
+  function getRandomQuestion() {
+    const questionsOfLevel = questionsByLevel.get(levelDifficulty) ?? [];
+    const randomIndex = Math.floor(Math.random() * questionsOfLevel.length);
+
+    const returnQuestion = questionsOfLevel[randomIndex];
+    setQuestionsByLevel((questionsByLevel) => {
+      const questionsOfLevel = questionsByLevel.get(levelDifficulty) ?? [];
+      questionsOfLevel.splice(randomIndex, 1);
+      return questionsByLevel.set(levelDifficulty, questionsOfLevel);
+    });
+
+    return returnQuestion;
+  }
+
   async function nextLevel() {
     if (currentLevel === maxLevel) {
       setGameState(GameState.won);
-      return confetti({ particleCount: 200 });
+      await confetti({ particleCount: 200 });
+      return;
     }
     const question = getRandomQuestion();
     setCurrentQuestion(question);
@@ -67,7 +83,8 @@ export default function SinglePlayerGame(): React.ReactElement {
 
   function answerQuestion(answer: number) {
     if (currentQuestion.correctResponse !== answer) {
-      return setGameState(GameState.over);
+      setGameState(GameState.over);
+      return;
     }
 
     setTimeToAnswerLeft(-1);
@@ -88,35 +105,20 @@ export default function SinglePlayerGame(): React.ReactElement {
     setTimeToAnswerLeft(defaultTimeToAnswer);
   }
 
-  function getRandomQuestion() {
-    const questionsOfLevel = questionsByLevel.get(levelDifficulty) ?? [];
-    const randomIndex = Math.floor(Math.random() * questionsOfLevel.length);
-
-    const returnQuestion = questionsOfLevel[randomIndex];
-    setQuestionsByLevel((questionsByLevel) => {
-      const questionsOfLevel = questionsByLevel.get(levelDifficulty) ?? [];
-      questionsOfLevel.splice(randomIndex, 1);
-      return questionsByLevel.set(levelDifficulty, questionsOfLevel);
-    });
-
-    return returnQuestion;
-  }
-
   async function leaveGame(): Promise<void> {
     await router.push("/");
   }
 
   useEffect(() => {
     separateQuestionsPerLevel();
-    setTimeToBeginGameLeft(timeToBeginGameLeft - 1);
+    setTimeToBeginGameLeft(defaultGameStartCounter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (timeToBeginGameLeft === 0) {
-      const question = getRandomQuestion();
-      setCurrentQuestion(question);
       setTimeToAnswerLeft(defaultTimeToAnswer);
+      setCurrentQuestion(getRandomQuestion());
       return;
     }
 
@@ -131,12 +133,8 @@ export default function SinglePlayerGame(): React.ReactElement {
   }, [timeToBeginGameLeft]);
 
   useEffect(() => {
-    if (timeToAnswerLeft === -1) {
-      return;
-    }
     if (timeToAnswerLeft === 0) {
-      // TODO: Activate this
-      // setGameState(GameState.over);
+      setGameState(GameState.over);
       return;
     }
 
