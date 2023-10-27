@@ -1,3 +1,7 @@
+import { useRouter } from "next/router";
+
+import { useQuestionTopicColor } from "~/data/questions/topic";
+
 interface QuestionAnswerProps {
   option: string;
   number: number;
@@ -7,21 +11,24 @@ interface QuestionAnswerProps {
 }
 
 export function Answer({ option, number, answerQuestion, correctAnswer, response }: QuestionAnswerProps) {
+  const bgColor = useQuestionTopicColor("hoverBg", useRouter().query.topic);
+
   function getBackgroundColor(number: number, correctAnswer: boolean) {
     if (correctAnswer && number === response) {
-      return "from-green-900 via-green-700 to-green-900";
+      return "bg-green";
     }
-    return "bg-gray-100 border-2 border-gray-300 hover:bg-gray-200 shadow-sm";
+    return `bg-surface1 text-text hover:text-surface0 shadow-sm ${bgColor}`;
   }
 
   function onClick() {
     answerQuestion(number + 1);
   }
+  2;
 
   return (
     <button
       onClick={onClick}
-      className={`md:min-h-[128px] w-full p-3 m-2 mx-auto text-lg rounded-lg duration-500 ${getBackgroundColor(number + 1, correctAnswer)}`}
+      className={`md:min-h-[128px] w-full p-3 m-2 mx-auto text-lg rounded-sm duration-150 hover:scale-105 ${getBackgroundColor(number + 1, correctAnswer)}`}
     >
       {option}
     </button>

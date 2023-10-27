@@ -8,7 +8,7 @@ export const pt = {
     projectDevelopedBy: "Este projeto foi desenvolvido por ",
     forTheDisciplineOfFPGA: " para a disciplina de FPGA.",
   },
-  game: {
+  inGame: {
     loading: "Carregando...",
     gameState: {
       over: "Resposta incorreta!",
@@ -22,6 +22,12 @@ export const pt = {
       skip: "Pular",
     },
     questionLabel: "Pergunta #",
+    gameOver: {
+      actions: {
+        tryAgain: "Reiniciar",
+        backToMainMenu: "Voltar ao início",
+      },
+    },
   },
   topics: {
     computerArchitecture: "Arquitetura de Computadores",

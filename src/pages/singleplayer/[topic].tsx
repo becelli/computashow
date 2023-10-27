@@ -28,7 +28,7 @@ export default function SinglePlayerGame(): React.ReactElement {
   const [questionsByLevel, setQuestionsByLevel] = useState(new Map<QuestionDifficulty, Question[]>());
 
   const [currentQuestion, setCurrentQuestion] = useState<Question>({
-    predicate: translation.game.loading,
+    predicate: translation.inGame.loading,
     correctResponse: 0,
     difficulty: QuestionDifficulty.easy,
     answers: [],
@@ -134,7 +134,7 @@ export default function SinglePlayerGame(): React.ReactElement {
 
   useEffect(() => {
     if (timeToAnswerLeft === 0) {
-      setGameState(GameState.over);
+      // setGameState(GameState.over);
       return;
     }
 

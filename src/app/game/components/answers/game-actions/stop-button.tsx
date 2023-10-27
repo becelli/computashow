@@ -7,8 +7,8 @@ interface StopButtonProps {
 export function StopButton({ stopGame }: StopButtonProps) {
   const translation = useTranslation();
   return (
-    <button className="w-full px-6 py-3 text-white duration-150 bg-red-500 rounded-md md:w-1/2 hover:bg-red-800" onClick={stopGame}>
-      <p>{String(translation.game.actions.stop)}</p>
+    <button className="w-full px-6 py-3 duration-150 rounded-sm text-text bg-surface1 md:w-1/2 hover:bg-red hover:text-base" onClick={stopGame}>
+      <p>{String(translation.inGame.actions.stop)}</p>
     </button>
   );
 }

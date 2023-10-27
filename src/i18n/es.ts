@@ -8,7 +8,7 @@ export const es: Translation = {
     projectDevelopedBy: "Este proyecto fue desarrollado por ",
     forTheDisciplineOfFPGA: " para la disciplina de FPGA.",
   },
-  game: {
+  inGame: {
     loading: "Cargando...",
     gameState: {
       over: "¡Respuesta incorrecta!",

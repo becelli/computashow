@@ -36,8 +36,8 @@ export default function Game({
 }: GameProps): React.ReactElement {
   function PlayingGame() {
     return (
-      <main className="flex flex-col items-center justify-center h-screen">
-        {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} restartGame={leave} gameState={gameState} />}
+      <main className="flex flex-col items-center justify-center h-screen min-h-screen">
+        {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} restartGame={leave} gameState={gameState} leaveGame={leave} />}
 
         <Countdown timer={timeToAnswerLeft} />
         <div className="container w-full h-full p-2 mx-auto sm:p-0">
@@ -62,5 +62,5 @@ export default function Game({
     );
   }
 
-  return <main className="flex flex-col min-h-screen bg-white">{timeToBeginGameLeft === 0 ? <PlayingGame /> : <StartingGame />}</main>;
+  return <main className="flex flex-col min-h-screen bg-base">{timeToBeginGameLeft === 0 ? <PlayingGame /> : <StartingGame />}</main>;
 }
