@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import Game from "~/app/game";
 import { GameState } from "~/app/game/entities/game-state";
+import { GameContextProvider } from "~/context/game-context";
 import { Question } from "~/data/questions/question";
 import { calculateQuestionDifficulty, QuestionDifficulty } from "~/data/questions/question-difficulty";
 import { useQuestionTopic } from "~/data/questions/topic";
@@ -36,9 +37,6 @@ export default function SinglePlayerGame(): React.ReactElement {
 
   const [currentLevel, setCurrentLevel] = useState(0);
   const levelDifficulty = calculateQuestionDifficulty(currentLevel, maxLevel);
-
-  const [timeToBeginGameLeft, setTimeToBeginGameLeft] = useState(defaultGameStartCounter + 1);
-  const [timeToAnswerLeft, setTimeToAnswerLeft] = useState(-1);
 
   const [gameState, setGameState] = useState(GameState.playing);
 
@@ -105,60 +103,43 @@ export default function SinglePlayerGame(): React.ReactElement {
     setTimeToAnswerLeft(defaultTimeToAnswer);
   }
 
-  async function leaveGame(): Promise<void> {
-    await router.push("/");
-  }
-
   useEffect(() => {
     separateQuestionsPerLevel();
     setTimeToBeginGameLeft(defaultGameStartCounter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (timeToBeginGameLeft === 0) {
-      setTimeToAnswerLeft(defaultTimeToAnswer);
-      setCurrentQuestion(getRandomQuestion());
-      return;
-    }
-
-    const interval = setInterval(() => {
-      setTimeToBeginGameLeft(timeToBeginGameLeft - 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timeToBeginGameLeft]);
-
-  useEffect(() => {
-    if (timeToAnswerLeft === 0) {
-      // setGameState(GameState.over);
-      return;
-    }
-
-    const interval = setInterval(() => {
-      setTimeToAnswerLeft(timeToAnswerLeft - 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [timeToAnswerLeft]);
+  function setNextQuestion() {
+    const question = getRandomQuestion();
+    setCurrentQuestion(question);
+    setTimeToAnswerLeft(defaultTimeToAnswer);
+  }
 
   return (
-    <Game
-      answerQuestion={answerQuestion}
-      skipQuestion={skipQuestion}
-      currentQuestion={currentQuestion}
-      currentLevel={currentLevel}
-      timeToBeginGameLeft={timeToBeginGameLeft}
-      timeToAnswerLeft={timeToAnswerLeft}
-      gameState={gameState}
+    <GameContextProvider
       answerCorrectness={answerCorrectness}
+      answerQuestion={nextLevel}
+      currentLevel={currentLevel}
+      defaultGameStartCounter={defaultGameStartCounter}
+      defaultTimeToAnswer={defaultTimeToAnswer}
+      gameState={gameState}
       questionSkipsAvailable={questionSkipsAvailable}
-      leave={leaveGame}
-    />
+      skipQuestion={() => {
+        setQuestionSkipsAvailable((questionSkipsAvailable) => questionSkipsAvailable - 1);
+        setNextQuestion();
+      }}
+      currentQuestion={currentQuestion}
+      setNextQuestion={setNextQuestion}
+    >
+      <Game
+        // answerQuestion={answerQuestion}
+        // skipQuestion={skipQuestion}
+        currentQuestion={currentQuestion}
+        currentLevel={currentLevel}
+        gameState={gameState}
+        answerCorrectness={answerCorrectness}
+        questionSkipsAvailable={questionSkipsAvailable}
+      />
+    </GameContextProvider>
   );
 }
