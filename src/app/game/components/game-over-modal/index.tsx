@@ -1,19 +1,20 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Message } from "~/app/game/components/game-over-modal/message";
 import { ReturnToMenuButton } from "~/app/game/components/game-over-modal/return-to-menu-button";
 import { TryAgainButton } from "~/app/game/components/game-over-modal/try-again-button";
 import { GameState } from "~/app/game/entities/game-state";
 import { UnclosableModal } from "~/components/unclosable-modal";
+import { useGameContext } from "~/context/game-context";
 import { useTranslation } from "~/i18n/hooks/use-translation";
 
 interface GameOverModalProps {
   gameState: GameState;
   currentLevel: number;
-  restartGame: () => void;
-  leaveGame: () => void;
 }
 
-export function GameOverModal({ gameState, currentLevel, restartGame, leaveGame }: GameOverModalProps) {
+export function GameOverModal({ gameState, currentLevel }: GameOverModalProps) {
   const translation = useTranslation();
+  const { leaveGame } = useGameContext();
 
   function getGameOverTitle(): string {
     switch (gameState) {
@@ -30,7 +31,7 @@ export function GameOverModal({ gameState, currentLevel, restartGame, leaveGame 
     <UnclosableModal title={getGameOverTitle()} showModal={true}>
       <section>
         <Message gameState={gameState} currentLevel={currentLevel} />
-        <TryAgainButton tryAgain={restartGame} />
+        <TryAgainButton tryAgain={leaveGame} />
         <ReturnToMenuButton returnToMainMenu={leaveGame} />
       </section>
     </UnclosableModal>

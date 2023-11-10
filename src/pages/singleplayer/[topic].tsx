@@ -67,7 +67,7 @@ export default function SinglePlayerGame(): React.ReactElement {
     return returnQuestion;
   }
 
-  async function nextLevel() {
+  async function nextLevel(setTimeToAnswerLeft: (time: number) => void) {
     if (currentLevel === maxLevel) {
       setGameState(GameState.won);
       await confetti({ particleCount: 200 });
@@ -79,7 +79,7 @@ export default function SinglePlayerGame(): React.ReactElement {
     setTimeToAnswerLeft(defaultTimeToAnswer);
   }
 
-  function answerQuestion(answer: number) {
+  function answerQuestion(answer: number, setTimeToAnswerLeft: (time: number) => void) {
     if (currentQuestion.correctResponse !== answer) {
       setGameState(GameState.over);
       return;
@@ -89,11 +89,11 @@ export default function SinglePlayerGame(): React.ReactElement {
     setAnswerCorrectness(true);
     setTimeout(async () => {
       setAnswerCorrectness(false);
-      await nextLevel();
+      await nextLevel(setTimeToAnswerLeft);
     }, waitTime);
   }
 
-  function skipQuestion() {
+  function skipQuestion(setTimeToAnswerLeft: (time: number) => void) {
     if (questionSkipsAvailable === 0) {
       return;
     }
@@ -105,35 +105,30 @@ export default function SinglePlayerGame(): React.ReactElement {
 
   useEffect(() => {
     separateQuestionsPerLevel();
-    setTimeToBeginGameLeft(defaultGameStartCounter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function setNextQuestion() {
     const question = getRandomQuestion();
     setCurrentQuestion(question);
-    setTimeToAnswerLeft(defaultTimeToAnswer);
+    // setTimeToAnswerLeft(defaultTimeToAnswer);
   }
 
   return (
     <GameContextProvider
       answerCorrectness={answerCorrectness}
-      answerQuestion={nextLevel}
+      answerQuestion={answerQuestion}
       currentLevel={currentLevel}
       defaultGameStartCounter={defaultGameStartCounter}
       defaultTimeToAnswer={defaultTimeToAnswer}
       gameState={gameState}
       questionSkipsAvailable={questionSkipsAvailable}
-      skipQuestion={() => {
-        setQuestionSkipsAvailable((questionSkipsAvailable) => questionSkipsAvailable - 1);
-        setNextQuestion();
-      }}
+      skipQuestion={skipQuestion}
       currentQuestion={currentQuestion}
       setNextQuestion={setNextQuestion}
+      setGameState={setGameState}
     >
       <Game
-        // answerQuestion={answerQuestion}
-        // skipQuestion={skipQuestion}
         currentQuestion={currentQuestion}
         currentLevel={currentLevel}
         gameState={gameState}

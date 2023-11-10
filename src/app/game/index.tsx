@@ -7,48 +7,34 @@ import { Countdown } from "~/app/game/components/countdown";
 import { GameOverModal } from "~/app/game/components/game-over-modal";
 import { Question as QuestionComponent } from "~/app/game/components/question";
 import { GameState } from "~/app/game/entities/game-state";
+import { useGameContext } from "~/context/game-context";
 import { Question } from "~/data/questions/question";
 
 export interface GameProps {
   currentQuestion: Question;
   currentLevel: number;
-  timeToBeginGameLeft: number;
-  timeToAnswerLeft: number;
   gameState: GameState;
   answerCorrectness: boolean;
   questionSkipsAvailable: number;
-  answerQuestion: (answer: number) => void;
-  skipQuestion: () => void;
-  leave: () => void;
 }
 
-export default function Game({
-  currentQuestion,
-  currentLevel,
-  timeToBeginGameLeft,
-  timeToAnswerLeft,
-  gameState,
-  answerCorrectness,
-  questionSkipsAvailable,
-  answerQuestion,
-  skipQuestion,
-  leave,
-}: GameProps): React.ReactElement {
+export default function Game({ currentQuestion, currentLevel, gameState, answerCorrectness, questionSkipsAvailable }: GameProps): React.ReactElement {
+  const { timeToBeginGameLeft } = useGameContext();
   function PlayingGame() {
     return (
       <main className="flex flex-col items-center justify-center h-screen min-h-screen">
-        {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} restartGame={leave} gameState={gameState} leaveGame={leave} />}
+        {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} gameState={gameState} />}
 
-        <Countdown timer={timeToAnswerLeft} />
+        <Countdown isStarting={timeToBeginGameLeft === 0} />
         <div className="container w-full h-full p-2 mx-auto sm:p-0">
           <div className="flex flex-col items-center h-full mx-auto text-center ">
             <QuestionComponent currentQuestion={currentQuestion} currentLevel={currentLevel} />
-            <Answers answerQuestion={answerQuestion} correctAnswer={answerCorrectness} currentQuestion={currentQuestion} />
+            <Answers correctAnswer={answerCorrectness} currentQuestion={currentQuestion} />
           </div>
         </div>
         <div className="flex w-full gap-2 p-5">
-          <SkipQuestion passQuestion={skipQuestion} passQuestionAvailable={questionSkipsAvailable} />
-          <StopButton stopGame={leave} />
+          <SkipQuestion passQuestionAvailable={questionSkipsAvailable} />
+          <StopButton />
         </div>
       </main>
     );
@@ -57,7 +43,7 @@ export default function Game({
   function StartingGame() {
     return (
       <main className="flex flex-col items-center justify-center h-screen">
-        <Countdown timer={timeToBeginGameLeft} />
+        <Countdown isStarting={timeToBeginGameLeft !== 0} />
       </main>
     );
   }

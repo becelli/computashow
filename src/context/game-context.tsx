@@ -29,9 +29,10 @@ interface GameContextProviderProps extends React.PropsWithChildren {
   questionSkipsAvailable: number;
   gameState: GameState;
   answerCorrectness: boolean;
-  skipQuestion: () => void;
-  answerQuestion: (answer: number) => void;
+  skipQuestion: (setTimeToAnswerLeft: React.Dispatch<React.SetStateAction<number>>) => void;
+  answerQuestion: (answer: number, setTimeToAnswerLeft: React.Dispatch<React.SetStateAction<number>>) => void;
   setNextQuestion: () => void;
+  setGameState: React.Dispatch<React.SetStateAction<GameState>>;
 }
 
 export const GameContextProvider = ({
@@ -46,14 +47,23 @@ export const GameContextProvider = ({
   answerCorrectness,
   setNextQuestion,
   currentQuestion,
+  setGameState,
 }: GameContextProviderProps) => {
   const router = useRouter();
 
-  const [timeToBeginGameLeft, setTimeToBeginGameLeft] = useState(defaultGameStartCounter + 1);
+  const [timeToBeginGameLeft, setTimeToBeginGameLeft] = useState(defaultGameStartCounter);
   const [timeToAnswerLeft, setTimeToAnswerLeft] = useState(-1);
 
   async function leaveGame(): Promise<void> {
     await router.push("/");
+  }
+
+  function answerQuestionAndResetTimer(answer: number): void {
+    answerQuestion(answer, setTimeToAnswerLeft);
+  }
+
+  function skipQuestionAndResetTimer(): void {
+    skipQuestion(setTimeToAnswerLeft);
   }
 
   useEffect(() => {
@@ -75,7 +85,7 @@ export const GameContextProvider = ({
 
   useEffect(() => {
     if (timeToAnswerLeft === 0) {
-      // setGameState(GameState.over);
+      setGameState(GameState.over);
       return;
     }
 
@@ -86,13 +96,20 @@ export const GameContextProvider = ({
     return () => {
       clearInterval(interval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeToAnswerLeft]);
+
+  useEffect(() => {
+    setTimeToAnswerLeft(defaultGameStartCounter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <GameContext.Provider
       value={{
-        answerQuestion,
-        skipQuestion,
+        answerQuestion: answerQuestionAndResetTimer,
+        skipQuestion: skipQuestionAndResetTimer,
+        leaveGame,
         currentQuestion,
         currentLevel,
         timeToBeginGameLeft,
@@ -100,7 +117,6 @@ export const GameContextProvider = ({
         gameState,
         answerCorrectness,
         questionSkipsAvailable,
-        leaveGame,
       }}
     >
       {children}
