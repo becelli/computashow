@@ -17,7 +17,8 @@ export function Answer({ option, number, answerQuestion, correctAnswer, response
     if (correctAnswer && number === response) {
       return "bg-green";
     }
-    return `bg-surface1 text-text hover:text-surface0 shadow-sm ${bgColor}`;
+
+    return `bg-surface1 text-text shadow-sm ${bgColor}`;
   }
 
   function onClick() {
@@ -26,10 +27,7 @@ export function Answer({ option, number, answerQuestion, correctAnswer, response
   2;
 
   return (
-    <button
-      onClick={onClick}
-      className={`md:min-h-[128px] w-full p-3 m-2 mx-auto text-lg rounded-sm duration-150 hover:scale-105 ${getBackgroundColor(number + 1, correctAnswer)}`}
-    >
+    <button onClick={onClick} className={`md:min-h-[128px] w-full p-3 m-2 mx-auto text-lg rounded-sm ${getBackgroundColor(number + 1, correctAnswer)}`}>
       {option}
     </button>
   );

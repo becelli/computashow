@@ -37,7 +37,7 @@ export default function Game({
   function PlayingGame() {
     return (
       <main className="flex flex-col items-center justify-center h-screen min-h-screen">
-        {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} restartGame={leave} gameState={gameState} leaveGame={leave} />}
+        {gameState !== GameState.playing && <GameOverModal currentLevel={currentLevel} gameState={gameState} leaveGame={leave} />}
 
         <Countdown timer={timeToAnswerLeft} />
         <div className="container w-full h-full p-2 mx-auto sm:p-0">
