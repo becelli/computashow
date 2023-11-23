@@ -14,8 +14,7 @@
 - Players face multiple-choice questions. Here, we don't use monetary values because of two items:
   - Currency values are temporal and are affected by inflation.
   - The game is not limited to a single country.
-    
-  Instead, we use a point system, where the player's score is determined by the number of questions answered correctly.
+    Instead, we use a point system, where the player's score is determined by the number of questions answered correctly.
 - The difficulty of questions increases as the player progresses, with higher stakes involved.
 
 ## Areas for Improvement
@@ -42,3 +41,20 @@
 ### Conclusion
 
 The ComputaShow game project demonstrates a interactive quiz application, closely resembling the popular "Show do Milhão" game format. While the current version showcases a basic foundation, the outlined improvements are crucial for enhancing user experience, broadening the game's appeal, and ensuring its long-term success.
+
+### Developed by
+
+<!-- ![Gustavo Becelli](https://github.com/becelli.png?size=100) -->
+
+<!-- use html to make the photo round and add the name below -->
+<div style="display: flex; gap: 15px;">
+<p style="display: flex;  flex-direction: column;">
+  <img src="https://github.com/becelli.png" width="100" height="100" style="border-radius: 100%; margin-right: 10px;"/>
+  <span>Gustavo Becelli</span>
+</p>
+
+<p style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+  <img src="https://github.com/lucasvoltera.png" width="100" height="100" style="border-radius: 100%; margin-right: 10px;"/>
+  <span>Lucas Voltera</span>
+</p>
+</div>
