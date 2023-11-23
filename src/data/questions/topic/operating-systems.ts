@@ -14,7 +14,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um programa que gerencia recursos e fornece serviços aos programas de aplicativos.",
       "Um dispositivo de hardware que armazena dados do usuário.",
       "Uma rede de computadores interconectados.",
-      "Um programa de edição de texto."
+      "Um programa de edição de texto.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 1,
@@ -25,7 +25,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Controlar e alocar recursos de hardware e fornecer serviços aos programas.",
       "Exibir imagens na tela do computador.",
       "Gerenciar o roteamento de tráfego na Internet.",
-      "Realizar cálculos matemáticos complexos."
+      "Realizar cálculos matemáticos complexos.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 1,
@@ -36,19 +36,14 @@ export const operatingSystemsQuestions: Question[] = [
       "Uma unidade de processamento central do sistema.",
       "Uma interface de usuário gráfica.",
       "Uma unidade de armazenamento para dados.",
-      "Um software de segurança."
+      "Um software de segurança.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 3,
   },
   {
     predicate: "Quais são os tipos comuns de sistemas operacionais?",
-    answers: [
-      "Windows, Mac, e Linux.",
-      "Browsers, Antivírus, e Editores de Texto.",
-      "Word, Excel, e PowerPoint.",
-      "Mouse, Teclado, e Monitor."
-    ],
+    answers: ["Windows, Mac, e Linux.", "Browsers, Antivírus, e Editores de Texto.", "Word, Excel, e PowerPoint.", "Mouse, Teclado, e Monitor."],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 1,
   },
@@ -58,7 +53,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um documento que descreve a interação do usuário com o sistema.",
       "Uma tarefa em execução, tal como um programa de processamento de texto.",
       "Uma funcionalidade de segurança.",
-      "Um componente de hardware essencial."
+      "Um componente de hardware essencial.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 2,
@@ -69,7 +64,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um armazenamento permanente de dados do usuário.",
       "A memória utilizada para armazenar o sistema operacional.",
       "Uma memória temporária usada para armazenar dados enquanto o sistema está em execução.",
-      "Um tipo de processador de gráficos."
+      "Um tipo de processador de gráficos.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 3,
@@ -80,7 +75,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Uma área de armazenamento para arquivos do sistema.",
       "Uma linguagem de programação.",
       "Uma interface gráfica de usuário.",
-      "Uma interface que aceita comandos de texto para interagir com o sistema."
+      "Uma interface que aceita comandos de texto para interagir com o sistema.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 4,
@@ -91,7 +86,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Uma funcionalidade de rede para transferir arquivos entre computadores.",
       "Uma pasta no sistema para arquivos temporários.",
       "Uma estrutura organizacional para armazenar e recuperar dados em um disco.",
-      "Um dispositivo de hardware para armazenamento permanente."
+      "Um dispositivo de hardware para armazenamento permanente.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 3,
@@ -102,7 +97,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um sistema que permite a execução de várias tarefas simultaneamente.",
       "Uma unidade de armazenamento em nuvem.",
       "Um método para salvar documentos automaticamente.",
-      "Uma função de segurança do sistema operacional."
+      "Uma função de segurança do sistema operacional.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 1,
@@ -113,7 +108,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Gerenciar a memória RAM do sistema.",
       "Escolher e controlar a execução de processos.",
       "Criar backups automáticos dos arquivos.",
-      "Controlar o funcionamento do disco rígido."
+      "Controlar o funcionamento do disco rígido.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 2,
@@ -124,7 +119,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um sistema de arquivos específico para armazenamento de imagens.",
       "Um sistema operacional de código aberto.",
       "Um método para criar arquivos compactados.",
-      "Um tipo de sistema de arquivos usado por alguns sistemas operacionais."
+      "Um tipo de sistema de arquivos usado por alguns sistemas operacionais.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 4,
@@ -135,7 +130,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um método de criptografia de dados.",
       "Uma forma de organizar arquivos em pastas diferentes.",
       "Uma técnica para reunir todos os arquivos no mesmo local.",
-      "Um processo onde arquivos são divididos em partes não contínuas no disco."
+      "Um processo onde arquivos são divididos em partes não contínuas no disco.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 4,
@@ -146,7 +141,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Regras que definem quem pode editar arquivos.",
       "Um tipo de criptografia para documentos importantes.",
       "Método para compactar arquivos.",
-      "Uma ferramenta para limpar dados inúteis do disco rígido."
+      "Uma ferramenta para limpar dados inúteis do disco rígido.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 1,
@@ -157,7 +152,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um sistema que responde a eventos dentro de um tempo definido.",
       "Um sistema que executa tarefas complexas rapidamente.",
       "Um sistema que prioriza apenas tarefas de alto consumo de CPU.",
-      "Um sistema que roda aplicativos com tempos de inicialização muito rápidos."
+      "Um sistema que roda aplicativos com tempos de inicialização muito rápidos.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 1,
@@ -168,7 +163,7 @@ export const operatingSystemsQuestions: Question[] = [
       "A quantidade de memória que o sistema pode suportar.",
       "A velocidade de processamento do sistema.",
       "A quantidade de processos que o sistema pode executar simultaneamente.",
-      "A capacidade de armazenamento do disco rígido."
+      "A capacidade de armazenamento do disco rígido.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 1,
@@ -179,7 +174,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um método para dividir o disco rígido em várias partições.",
       "Um método para aumentar a capacidade de armazenamento do disco rígido.",
       "Uma técnica de gerenciamento de memória virtual.",
-      "Um método de compactação de arquivos do sistema."
+      "Um método de compactação de arquivos do sistema.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 3,
@@ -190,7 +185,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um método para trocar módulos do kernel do sistema operacional.",
       "Um processo para mover arquivos grandes para outra partição.",
       "Uma técnica de substituição de memória entre RAM e disco.",
-      "Uma forma de compactar arquivos no disco rígido."
+      "Uma forma de compactar arquivos no disco rígido.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 3,
@@ -201,7 +196,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Uma técnica para remover arquivos desnecessários do sistema.",
       "Uma situação em que a memória é dividida em várias partições.",
       "Uma situação em que a memória é desperdiçada devido ao tamanho fixo de alocação.",
-      "Uma técnica para compactar dados no disco rígido."
+      "Uma técnica para compactar dados no disco rígido.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 3,
@@ -212,7 +207,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Reduzir o tempo de inicialização do sistema.",
       "Melhorar a velocidade de processamento da CPU.",
       "Distribuir o tempo de CPU equitativamente entre os processos.",
-      "Priorizar apenas os processos de alta prioridade."
+      "Priorizar apenas os processos de alta prioridade.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 3,
@@ -223,7 +218,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um sistema que organiza arquivos por categorias.",
       "Um sistema que replica todos os arquivos para cada computador na rede.",
       "Um sistema que permite o compartilhamento de arquivos em uma rede.",
-      "Um sistema que comprime arquivos para economizar espaço de armazenamento."
+      "Um sistema que comprime arquivos para economizar espaço de armazenamento.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 3,
@@ -234,7 +229,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Uma trilha de conexão entre os discos rígidos.",
       "Uma estrada digital que transmite dados entre componentes do computador.",
       "Uma porta de comunicação em uma rede de computadores.",
-      "Uma técnica de armazenamento em cache de processos frequentemente utilizados."
+      "Uma técnica de armazenamento em cache de processos frequentemente utilizados.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 2,
@@ -245,7 +240,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Gerenciar a comunicação entre periféricos do computador.",
       "Armazenar permanentemente as configurações do sistema operacional.",
       "Controlar o comportamento e operação básica do hardware.",
-      "Monitorar a integridade dos arquivos do sistema."
+      "Monitorar a integridade dos arquivos do sistema.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 3,
@@ -256,7 +251,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um tipo de memória principal de alta velocidade.",
       "Um tipo de memória secundária de alta capacidade.",
       "Um tipo de memória de leitura e escrita.",
-      "Um tipo de memória utilizada para armazenar arquivos de sistema."
+      "Um tipo de memória utilizada para armazenar arquivos de sistema.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 1,
@@ -267,7 +262,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Dividir a memória em partições de tamanho variável para alocar processos.",
       "Reduzir a fragmentação interna da memória principal.",
       "Eliminar o processo de swapping para otimizar a memória.",
-      "Comprimir os arquivos do sistema para economizar espaço."
+      "Comprimir os arquivos do sistema para economizar espaço.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 1,
@@ -278,7 +273,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Sistemas que suportam vários dispositivos de entrada.",
       "Sistemas que permitem acesso a vários aplicativos simultaneamente.",
       "Sistemas que permitem que várias pessoas usem o computador ao mesmo tempo.",
-      "Sistemas que possuem múltiplos discos rígidos para armazenamento."
+      "Sistemas que possuem múltiplos discos rígidos para armazenamento.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 3,
@@ -289,7 +284,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Priorizar processos de alta prioridade.",
       "Alocar memória de forma circular para os processos.",
       "Distribuir tempo de CPU equitativamente entre os processos.",
-      "Executar os processos em intervalos regulares de tempo fixo."
+      "Executar os processos em intervalos regulares de tempo fixo.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 3,
@@ -300,7 +295,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um dispositivo que pode ser conectado e usado imediatamente, sem a necessidade de configuração manual.",
       "Um dispositivo que requer instalação manual de drivers para funcionar.",
       "Um dispositivo que pode ser conectado a qualquer porta USB.",
-      "Um dispositivo que não é compatível com sistemas operacionais antigos."
+      "Um dispositivo que não é compatível com sistemas operacionais antigos.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 1,
@@ -311,7 +306,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Um modo de operação que executa apenas aplicativos de nível do usuário.",
       "Um modo de operação que executa processos do kernel e de nível de usuário simultaneamente.",
       "Um modo de operação privilegiado que executa o núcleo do sistema operacional.",
-      "Um modo de operação que prioriza tarefas de alto consumo de CPU."
+      "Um modo de operação que prioriza tarefas de alto consumo de CPU.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 3,
@@ -322,7 +317,7 @@ export const operatingSystemsQuestions: Question[] = [
       "É a divisão da memória em pequenos blocos para alocar processos e os sistemas operacionais lidam com ela através de compactação.",
       "É o desperdício de memória não utilizada e os sistemas operacionais lidam com ela através da união de partições de memória.",
       "É a perda de dados na memória principal e os sistemas operacionais lidam com ela por meio de backups frequentes.",
-      "É a ocupação excessiva de memória por processos e os sistemas operacionais lidam com ela por meio do algoritmo de substituição de páginas."
+      "É a ocupação excessiva de memória por processos e os sistemas operacionais lidam com ela por meio do algoritmo de substituição de páginas.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 2,
@@ -333,7 +328,7 @@ export const operatingSystemsQuestions: Question[] = [
       "É o ato de mudar entre diferentes sistemas operacionais em um único computador.",
       "É o método de transferir processos entre a memória principal e a memória secundária.",
       "É a troca de informações entre CPUs de sistemas em rede.",
-      "É a prática de migrar programas para a nuvem."
+      "É a prática de migrar programas para a nuvem.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 2,
@@ -344,7 +339,7 @@ export const operatingSystemsQuestions: Question[] = [
       "Sistemas de 64 bits têm o dobro do desempenho dos sistemas de 32 bits.",
       "Sistemas de 32 bits são mais rápidos, mas menos estáveis que sistemas de 64 bits.",
       "Sistemas de 64 bits suportam maior quantidade de RAM e processamento de dados.",
-      "Sistemas de 32 bits são mais econômicos e consomem menos energia."
+      "Sistemas de 32 bits são mais econômicos e consomem menos energia.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 3,
@@ -355,7 +350,7 @@ export const operatingSystemsQuestions: Question[] = [
       "É a técnica de priorização de dispositivos de E/S com base na velocidade.",
       "É o processo de troca de dispositivos de E/S entre diferentes computadores.",
       "É a organização de dispositivos de E/S em pilhas para acesso rápido.",
-      "É a técnica de gerenciar e priorizar requisições de dispositivos de E/S."
+      "É a técnica de gerenciar e priorizar requisições de dispositivos de E/S.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 4,
@@ -366,7 +361,7 @@ export const operatingSystemsQuestions: Question[] = [
       "É um erro de hardware que leva à corrupção de páginas de memória.",
       "É o congestionamento de solicitações para páginas de memória.",
       "É a página de memória corrompida devido a falhas elétricas.",
-      "É a falha no acesso a uma página necessária, levando à sua busca no disco."
+      "É a falha no acesso a uma página necessária, levando à sua busca no disco.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 4,
@@ -377,7 +372,7 @@ export const operatingSystemsQuestions: Question[] = [
       "É um mecanismo que impede o acesso concorrente a determinados recursos.",
       "É um método para otimizar a transferência de processos entre diferentes CPUs.",
       "É a capacidade de interromper um processo em execução para dar prioridade a um processo mais importante.",
-      "É um sistema que prevê os eventos antes de serem executados."
+      "É um sistema que prevê os eventos antes de serem executados.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 3,
@@ -388,7 +383,7 @@ export const operatingSystemsQuestions: Question[] = [
       "É uma situação em que um recurso está em uso por mais tempo do que o previsto.",
       "É um estado em que um processo espera por um recurso que está sendo utilizado por outro processo.",
       "É um erro na lógica do programa que leva a um loop infinito.",
-      "É um acidente crítico que leva a uma falha catastrófica no sistema."
+      "É um acidente crítico que leva a uma falha catastrófica no sistema.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 2,
@@ -399,7 +394,7 @@ export const operatingSystemsQuestions: Question[] = [
       "São camadas adicionais de segurança usadas para proteger os processos uns dos outros.",
       "São pequenos processos que compartilham a mesma área de memória e recursos.",
       "São processos de inicialização que preparam o sistema para executar programas.",
-      "São protocolos de rede usados para transmissão de dados entre sistemas."
+      "São protocolos de rede usados para transmissão de dados entre sistemas.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 2,
@@ -410,7 +405,7 @@ export const operatingSystemsQuestions: Question[] = [
       "É um sistema que distribui dados de um único sistema para vários sistemas de arquivos locais.",
       "É um sistema que organiza os arquivos em múltiplos discos locais para acesso rápido.",
       "É um sistema que distribui os arquivos em vários discos para backup de dados.",
-      "É um sistema que divide e distribui dados em diferentes locais de armazenamento conectados em rede."
+      "É um sistema que divide e distribui dados em diferentes locais de armazenamento conectados em rede.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 4,
@@ -421,7 +416,7 @@ export const operatingSystemsQuestions: Question[] = [
       "É um algoritmo usado para evitar a corrupção de páginas de memória.",
       "É um método para reorganizar páginas de memória para acesso mais rápido.",
       "É um algoritmo que decide qual página de memória deve ser removida quando a memória está cheia.",
-      "É um algoritmo que organiza páginas de memória em segmentos para evitar fragmentação."
+      "É um algoritmo que organiza páginas de memória em segmentos para evitar fragmentação.",
     ],
     difficulty: QuestionDifficulty.hard,
     correctResponse: 3,
