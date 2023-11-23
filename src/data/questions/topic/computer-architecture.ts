@@ -22,7 +22,7 @@ export const computerArchitectureQuestions: Question[] = [
   {
     predicate: 'O que é um "gate" (porta) lógico em circuitos digitais?',
     answers: [
-      "Um dispositivo para controlar o fluxo de corrente",
+      "Um dispositivo para fazer cálculos de números com ponto flutuante",
       "Um componente para converter sinais digitais em analógicos",
       "Um dispositivo que executa uma operação lógica",
       "Um tipo de bateria",
@@ -31,8 +31,8 @@ export const computerArchitectureQuestions: Question[] = [
     correctResponse: 3,
   },
   {
-    predicate: 'Qual porta lógica representa a operação "E"?',
-    answers: ["OR", "AND", "NOT", "XOR"],
+    predicate: 'Qual é o resultado da operação "AND" quando se os operandos forem respectivamente 1 e 0?',
+    answers: ["1", "0", "Depende dos valores dos operandos", "2"],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 2,
   },
@@ -54,24 +54,29 @@ export const computerArchitectureQuestions: Question[] = [
     correctResponse: 1,
   },
   {
-    predicate: "Qual é o objetivo do codificador em circuitos digitais?",
+    predicate: "Qual é a função principal de um codificador em circuitos digitais?",
     answers: [
-      "Converter sinais analógicos em sinais digitais",
-      "Converter sinais digitais em sinais analógicos",
-      "Converter um conjunto de dados em um código mais simples",
-      "Controlar a corrente no circuito",
+      "Compactar dados para ocupar menos espaço.",
+      "Ajustar a corrente para fazer o circuito sorrir",
+      "Codificar Informações",
+      "Fazer malabarismos com sinais analógicos",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 3,
   },
   {
     predicate: 'O que representa o termo "clock" (relógio) em circuitos digitais?',
-    answers: ["Um dispositivo para medir o tempo", "Um componente usado para sincronizar operações em circuitos", "Um tipo de bateria", "Um tipo de memória"],
+    answers: [
+      "Um dispositivo que transforma sinais analógicos em emojis digitais",
+      "Um componente usado para sincronizar operações em circuitos",
+      "Um tipo de bateria",
+      "Um tipo de memória",
+    ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 2,
   },
   {
-    predicate: "Qual é a unidade de medida comumente usada para representar a velocidade do clock em circuitos digitais?",
+    predicate: "Qual é a unidade de medida padrão para representar a frequência do clock em circuitos digitais",
     answers: ["Megabytes", "Hertz", "Watts", "Volts"],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 2,
@@ -113,9 +118,9 @@ export const computerArchitectureQuestions: Question[] = [
     predicate: "O que é um bit em termos de Arquitetura de Computadores?",
     answers: [
       "Uma unidade de medida de velocidade do processador.",
-      "Um conjunto de instruções de um programa.",
+      "Um emoji.",
       "A unidade mais básica de informação, representando um dígito binário (0 ou 1).",
-      "Uma unidade de armazenamento de dados.",
+      "Uma unidade de frequência do clock.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 3,
@@ -135,20 +140,20 @@ export const computerArchitectureQuestions: Question[] = [
     predicate: "O que é a Arquitetura de Von Neumann?",
     answers: [
       "Um modelo de arquitetura de computadores que utiliza múltiplos processadores.",
-      "Um modelo de arquitetura de computadores que não utiliza memória RAM.",
+      "Um modelo de arquitetura de computadores que dispensa o uso de memória RAM.",
       "Um modelo de arquitetura de computadores que utiliza apenas dispositivos analógicos.",
-      "Um modelo de arquitetura de computadores que separa a memória que armazena dados e instruções do processador que realiza operações.",
+      "Um modelo de arquitetura de computadores que integra a memória (dados e instruções) com o processador que realiza operações",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 4,
   },
   {
-    predicate: "O que é a Unidade de Controle (CU) em um processador?",
+    predicate: "O que é a Unidade de Controle em um processador?",
     answers: [
       "A parte do processador que coordena e controla a execução de instruções, garantindo que todas as operações sejam realizadas no momento adequado.",
       "A parte do processador responsável por processar gráficos e imagens.",
-      "A memória principal do computador.",
-      "A parte do processador que armazena dados e instruções temporariamente.",
+      "A memória permanente do computador.",
+      "A parte do processador que sincronizam as operações.",
     ],
     difficulty: QuestionDifficulty.easy,
     correctResponse: 1,
@@ -168,10 +173,10 @@ export const computerArchitectureQuestions: Question[] = [
   {
     predicate: "O que é o pipeline de instruções em Arquitetura de Computadores?",
     answers: [
-      "Um tipo de memória usada para armazenar instruções do sistema operacional.",
+      "Uma forma avançada de memória usada para armazenar instruções do sistema operacional",
       "Um modelo de processamento que permite a execução paralela de várias instruções.",
       "Um tipo de barramento utilizado exclusivamente para transferir instruções.",
-      "Um componente que controla o fluxo de dados entre a CPU e a memória principal.",
+      "Um componente que controla o fluxo de dados entre a CPU e a memória principal, de forma sequencial",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 2,
@@ -184,10 +189,10 @@ export const computerArchitectureQuestions: Question[] = [
   },
 
   {
-    predicate: "Qual é a função do Registrador de Instruções em um processador?",
+    predicate: "Qual é o papel do Contador de Programa em um processador?",
     answers: [
       "Armazenar temporariamente os dados que estão sendo processados.",
-      "Armazenar as instruções que serão executadas pelo processador.",
+      "Manter o endereço da próxima instrução a ser buscada na memória.",
       "Controlar a unidade de controle do processador.",
       "Gerenciar a comunicação entre a CPU e os dispositivos de entrada e saída.",
     ],
@@ -243,12 +248,12 @@ export const computerArchitectureQuestions: Question[] = [
     correctResponse: 2,
   },
   {
-    predicate: "O que é um contador binário em circuitos digitais?",
+    predicate: "O que caracteriza um decodificador em cirtuitos digitais",
     answers: [
-      "Um circuito que conta os impulsos elétricos em um sistema analógico.",
       "Um dispositivo que controla a corrente em um circuito digital.",
       "Um circuito que realiza operações de contagem em números decimais.",
-      "Um circuito que conta em sequência em binário conforme os pulsos de clock.",
+      "Um componente que converte sinais digitais em analógicos.",
+      "Um circuito que converte códigos binários em sinais de saída correspondentes.",
     ],
     difficulty: QuestionDifficulty.medium,
     correctResponse: 4,
@@ -289,11 +294,11 @@ export const computerArchitectureQuestions: Question[] = [
   },
 
   {
-    predicate: "O que são as unidades funcionais de um processador?",
+    predicate: "Pergunta: Em termos de arquitetura de processadores, o que caracteriza as unidades de tratamento de exceções?",
     answers: [
       "Unidades responsáveis por transferir dados entre a CPU e a memória.",
       "Unidades responsáveis por controlar a execução das instruções.",
-      "Unidades responsáveis por processar operações matemáticas e lógicas.",
+      "Unidades especializadas no tratamento de eventos inesperados durante a execução.",
       "Unidades responsáveis por armazenar temporariamente os dados.",
     ],
     difficulty: QuestionDifficulty.hard,
