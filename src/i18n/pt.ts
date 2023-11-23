@@ -6,7 +6,7 @@ export const pt = {
     welcomeMessage: "Tá ligado no que é? É um jogo de perguntas e respostas sobre Arquitetura de Computadores e Sistemas Operacionais.",
     singlePlayer: "Bora Jogar",
     projectDevelopedBy: "Esse projeto foi feito por",
-    forTheDisciplineOfFPGA: " naquela aula de FPGA.",
+    forTheDisciplineOfFPGA: " na disciplina de FPGA.",
   },
   inGame: {
     loading: "Carregando, segura aí...",

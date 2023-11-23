@@ -5,16 +5,16 @@ export const en: Translation = {
   home: {
     and: "and",
     welcome: "Welcome to ComputaShow!",
-    welcomeMessage: "ComputaShow is a quiz game about Computer Architecture and Operating Systems.",
-    singlePlayer: "Play",
-    projectDevelopedBy: "This project was developed by ",
+    welcomeMessage: "You know what it is? It's a quiz game about Computer Architecture and Operating Systems.",
+    singlePlayer: "Let's Play",
+    projectDevelopedBy: "This project was developed by",
     forTheDisciplineOfFPGA: " for the FPGA course.",
   },
   inGame: {
-    loading: "Loading...",
+    loading: "Loading, hold on...",
     gameState: {
-      over: "Incorrect answer!",
-      won: "You won!",
+      over: "Oops, wrong answer!",
+      won: "Nailed it! Well done!",
       playing: "Time's up!",
     },
     actions: {
@@ -25,9 +25,13 @@ export const en: Translation = {
     },
     questionLabel: "Question #",
     gameOver: {
+      message: "You scored {points} points! Wow, take a seat!",
       actions: {
-        backToMainMenu: "Back to main menu",
+        backToMainMenu: "Back to start",
       },
+    },
+    gameWon: {
+      message: "Congratulations!!! You scored {points} points!",
     },
   },
   topics: {

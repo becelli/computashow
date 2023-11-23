@@ -4,18 +4,18 @@ export const es: Translation = {
   gameName: "ComputaShow",
   home: {
     and: "y",
-    welcome: "¡Bienvenidos a ComputaShow!",
-    welcomeMessage: "ComputaShow es un juego de preguntas y respuestas sobre temas de Arquitectura de Ordenadores y Sistemas Operativos.",
-    singlePlayer: "Jugar",
-    projectDevelopedBy: "Este proyecto fue desarrollado por ",
-    forTheDisciplineOfFPGA: " para la disciplina de FPGA.",
+    welcome: "¡Bienvenido a ComputaShow!",
+    welcomeMessage: "¿Sabés de qué se trata? Es un juego de preguntas y respuestas sobre Arquitectura de Ordenadores y Sistemas Operativos.",
+    singlePlayer: "Vamos a jugar",
+    projectDevelopedBy: "Este proyecto fue desarrollado por",
+    forTheDisciplineOfFPGA: " para la asignatura de FPGA.",
   },
   inGame: {
-    loading: "Cargando...",
+    loading: "Cargando, esperá un poco...",
     gameState: {
-      over: "¡Respuesta incorrecta!",
-      won: "¡Has ganado!",
-      playing: "¡El tiempo se acabó!",
+      over: "¡Uh, respuesta incorrecta!",
+      won: "¡Lo lograste! ¡Bien hecho!",
+      playing: "¡Se acabó el tiempo!",
     },
     actions: {
       stop: "Parar",
@@ -25,13 +25,17 @@ export const es: Translation = {
     },
     questionLabel: "Pregunta #",
     gameOver: {
+      message: "¡Hiciste {points} puntos! ¡Increíble, tomate un descanso!",
       actions: {
         backToMainMenu: "Volver al inicio",
       },
     },
+    gameWon: {
+      message: "¡Felicitaciones!!! Hiciste {points} puntos!",
+    },
   },
   topics: {
-    computerArchitecture: "Arquitectura de Computadores",
+    computerArchitecture: "Arquitectura de Ordenadores",
     operatingSystems: "Sistemas Operativos",
   },
 };
