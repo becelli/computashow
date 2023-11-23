@@ -1,10 +1,8 @@
 import { Fragment } from "react";
 
+import { GameOverMessage } from "~/app/game/components/game-over-modal/message/game-over-message";
+import { GameWonMessage } from "~/app/game/components/game-over-modal/message/game-won-message";
 import { GameState } from "~/app/game/entities/game-state";
-import { rewardPerLevel } from "~/data/rewards-per-level";
-
-import { GameOverMessage } from "./game-over-message";
-import { GameWonMessage } from "./game-won-message";
 
 interface ShowMessageProps {
   gameState: GameState;
@@ -13,10 +11,10 @@ interface ShowMessageProps {
 
 export function Message({ gameState, currentLevel }: ShowMessageProps) {
   if (gameState === GameState.won) {
-    return <GameWonMessage reward={rewardPerLevel[currentLevel].toString()} />;
+    return <GameWonMessage currentLevel={currentLevel} />;
   }
   if (gameState === GameState.over) {
-    return <GameOverMessage reward={rewardPerLevel[currentLevel].toString()} />;
+    return <GameOverMessage currentLevel={currentLevel} />;
   }
   return <Fragment />;
 }

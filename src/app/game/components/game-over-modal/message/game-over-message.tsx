@@ -1,11 +1,10 @@
+import { useTranslation } from "~/i18n/hooks/use-translation";
+
 interface GameOverMessageProps {
-  reward: string;
+  currentLevel: number;
 }
 
-export function GameOverMessage({ reward }: GameOverMessageProps) {
-  return (
-    <p>
-      Você ganhou <strong>{reward} reais</strong>! Ma oeee, senta lá!
-    </p>
-  );
+export function GameOverMessage({ currentLevel }: GameOverMessageProps) {
+  const translation = useTranslation();
+  return <p>{String(translation.inGame.gameOver.message.replace("{points}", currentLevel.toString()))}</p>;
 }

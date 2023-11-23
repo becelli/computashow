@@ -20,7 +20,7 @@ export default function SinglePlayerGame(): React.ReactElement {
   const defaultGameStartCounter = 3;
   const defaultTimeToAnswer = 30;
   const defaultQuestionSkipsAvailable = 3;
-  const maxLevel = 3;
+  const maxLevel = 15;
   const waitTime = 2000;
 
   // Set up the game state
@@ -135,7 +135,7 @@ export default function SinglePlayerGame(): React.ReactElement {
 
   useEffect(() => {
     if (timeToAnswerLeft === 0) {
-      // setGameState(GameState.over);
+      setGameState(GameState.over);
       return;
     }
 

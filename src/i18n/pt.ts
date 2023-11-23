@@ -13,19 +13,23 @@ export const pt = {
     gameState: {
       over: "Vacilou, resposta errada!",
       won: "Zerou! Mandou bem!",
-      playing: "Acabou o tempo mermão!",
+      playing: "Acabou o tempo!",
     },
     actions: {
-      stop: "Vai dar não, tô fora",
-      hit: "Acertou, mizeravi!",
-      miss: "Errei, fui moleque! HAHAHaH",
-      skip: "Pula essa",
+      stop: "Parar",
+      hit: "Acertar",
+      miss: "Errar",
+      skip: "Pular",
     },
     questionLabel: "Pergunta #",
     gameOver: {
+      message: "Você fez {points} pontos! Maoeee, senta lá!",
       actions: {
         backToMainMenu: "Volta pro início",
       },
+    },
+    gameWon: {
+      message: "Parabéns!!! Você fez {points} pontos!",
     },
   },
   topics: {
