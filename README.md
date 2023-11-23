@@ -44,17 +44,7 @@ The ComputaShow game project demonstrates a interactive quiz application, closel
 
 ### Developed by
 
-<!-- ![Gustavo Becelli](https://github.com/becelli.png?size=100) -->
-
-<!-- use html to make the photo round and add the name below -->
-<div style="display: flex; gap: 15px;">
-<p style="display: flex;  flex-direction: column;">
-  <img src="https://github.com/becelli.png" width="100" height="100" style="border-radius: 100%; margin-right: 10px;"/>
-  <span>Gustavo Becelli</span>
-</p>
-
-<p style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
-  <img src="https://github.com/lucasvoltera.png" width="100" height="100" style="border-radius: 100%; margin-right: 10px;"/>
-  <span>Lucas Voltera</span>
-</p>
-</div>
+| Gustavo Becelli | Lucas Voltera |
+| :-------------: | :-----------: |
+| ![Gustavo Becelli](https://github.com/becelli.png?size=100) | ![Lucas Voltera](https://github.com/lucasvoltera.png?size=100) |
+| [GitHub](https://github.com/becelli) | [GitHub](https://github.com/lucasvoltera) |
