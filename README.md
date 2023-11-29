@@ -1,50 +1,69 @@
-# ComputaShow Game Project Report
+# ComputaShow Game Project
 
-## Project Overview
+## How to run
 
-### Development Environment
+After cloning the repository, run the following commands:
 
-- **Framework:** The project is developed using Next.js version 13, a meta-framework built on top of React.js. It leverages Next.js' Page Router for navigation and page management.
-- **Styling:** TailwindCSS is used for styling the application, providing a utility-first approach for designing the interface.
-- **Dependency Management:** To install dependencies, the command `pnpm install` is used. For development purposes, `pnpm dev` is the go-to command. For detailed usage and features, referring to the official documentation of these tools is recommended.
+```bash
+pnpm install
+pnpm dev
+```
 
-### Implementation Highlights
+## Report
 
-- The game is designed to mimic the format of the popular "Millionaire" quiz show. In Brazil, the show is known as "Show do Milhão".
-- Players face multiple-choice questions. Here, we don't use monetary values because of two items:
-  - Currency values are temporal and are affected by inflation.
-  - The game is not limited to a single country.
-    Instead, we use a point system, where the player's score is determined by the number of questions answered correctly.
-- The difficulty of questions increases as the player progresses, with higher stakes involved.
+### Game Description
 
-## Areas for Improvement
+ComputaShow is a quiz-based game where players tackle multiple-choice questions within a given time limit. It draws inspiration from the "Millionaire" quiz format, known in Brazil as "Show do Milhão", but utilizes a point system rather than monetary values to suit an international audience. The game features:
 
-### Application State Management
+- **Time Limit:** Each question must be answered within 30 seconds, adding urgency and pace. If the player fails to answer within the time limit, the game ends.
+- **Skip Option:** Players can skip up to three questions per game, though skipping does not earn points. This feature is intended as a last resort.
+- **Question Difficulty:** Fifteen questions of escalating difficulty are presented, with difficulty levels not disclosed to players. The player's score is determined by the number of questions answered correctly.
+- **Randomization:** Questions and answer options are randomized to prevent memorization. However, this is a temporary solution, as a database of questions and answers would be more effective.
 
-- **Issue:** Current implementation involves a re-render every second due to the way the remaining time state is handled. This is caused by passing variables as parameters from parent to child components.
-- **Solution:** Refactor state management to use a more efficient approach, such as using React's Context API or a state management library like Redux.
+### Technical Framework
 
-### Content Expansion
+- **Framework:** Developed with Next.js version 13. Utilizes Next.js' Page Router for navigation and page management.
+- **Styling:** TailwindCSS for a utility-first design approach.
+- **Dependency Management:** Utilizes `pnpm` for dependency management.
 
-- **Addition of Topics/Disciplines:** Introduce more variety in questions by including different topics or academic disciplines.
-- **Dynamic Rendering in TailwindCSS:** TailwindCSS needs adjustment to dynamically render colors. The current method uses classes like `bg-yellow`, limiting flexibility.
+### Development Challenges and Solutions
 
-### Feature Enhancements
+- **Unique UI Design:** Struggled to create a distinct and appealing UI. We initially tried a minimalist approach, but it did not look good. We ended up using the Catppuccino color palette, which is visually pleasing, and tried to make the UI resemble a retro game show.
+- **Question Curation:** Time-consuming selection and curation of diverse questions, with some ending up too similar or ambiguously phrased. A database of existing questions and answers would be more effective. However, this would require a backend, which is not currently implemented and it helped us to learn more about the topics of the questions.
+- **Time Limit Implementation:** We tried implementing the timer with `setTimeout` and `setInterval`. However, as we faced problems, we adopted `useEffect` for the timer, which unfortunately causes re-render issues and button focus problems. This forced us to remove any hover effects or animations from the buttons.
 
-- **Language Support:** Implement multilingual support to cater to a broader audience.
-- **Multiplayer Mode:** Introduce a multiplayer feature to allow competition among multiple players.
-- **Global Ranking:** Implement a global ranking system to encourage competition and engagement.
-- **Answer Security:** Enhance the security of the correct answer to prevent easy prediction or cheating.
-- **Desktop Application:** Consider porting the application to desktop platforms using frameworks like Tauri or Electron.
-- **Hints:** Features like lifelines or hints are potentially interesting additions to the game.
+### Areas for Improvement
 
-### Conclusion
+#### State Management
 
-The ComputaShow game project demonstrates a interactive quiz application, closely resembling the popular "Show do Milhão" game format. While the current version showcases a basic foundation, the outlined improvements are crucial for enhancing user experience, broadening the game's appeal, and ensuring its long-term success.
+- **Issue:** Frequent re-renders due to time state handling, caused by passing variables as parameters from parent to child components. This is a result of the current implementation.
+- **Solution:** Implement efficient state management, possibly with React's Context API or Redux library. This would reduce the number of re-renders or eliminate them entirely.
+
+#### Content Enhancement
+
+- **Topics Expansion:** Introduce a wider range of questions and topics. We suggest the use of a database of questions and answers.
+- **TailwindCSS Adjustment:** Improve dynamic color rendering capabilities. The current implementation has issues with dynamic color rendering, as it uses classes like `bg-yellow` and TailwindCSS can remove these tags during build time.
+
+#### Feature Additions
+
+- **Language Support:** Implement multilingual capabilities, to cater to a wider audience. Currently, the game supports Portuguese, English, and Spanish.
+- **Multiplayer Mode and Global Ranking:** To foster competition and engagement. This would require a backend, which is not currently implemented. We suggest the use of a database to store player scores.
+- **Answer Security:** Strengthen security against cheating or easy prediction of the correct answer. For example, the current implementation leaks the correct answer in the HTML source code, although it is obfuscated.
+- **Desktop Application:** Consider expansion to desktop platforms. This would require the use of frameworks like Tauri or Electron, but would allow for a more native and offline experience.
+- **Gameplay Elements:** Introduce lifelines or hints to enhance gameplay. This would significantly increase the complexity of the game, but would also make it more engaging.
+
+### Internationalization
+
+- **Implementation:** Utilized Next.js i18n library; initial support for Portuguese, English, and Spanish.
+- **Challenges:** Difficulties in translating questions and UI elements accurately. We used Google Translate and ChatGPT to translate questions and answers, but the results are not perfect. We also had to manually translate UI elements.
+
+## Conclusion
+
+The ComputaShow project, while currently offering a solid quiz game experience, has significant potential for enhancement. The identified improvements are essential for elevating the user experience, expanding its reach for learning purposes.
 
 ### Developed by
 
-| Gustavo Becelli | Lucas Voltera |
-| :-------------: | :-----------: |
+|                       Gustavo Becelli                       |                         Lucas Voltera                          |
+| :---------------------------------------------------------: | :------------------------------------------------------------: |
 | ![Gustavo Becelli](https://github.com/becelli.png?size=100) | ![Lucas Voltera](https://github.com/lucasvoltera.png?size=100) |
-| [GitHub](https://github.com/becelli) | [GitHub](https://github.com/lucasvoltera) |
+|            [GitHub](https://github.com/becelli)             |           [GitHub](https://github.com/lucasvoltera)            |
