@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
 
-import { SupportedLanguages, translations } from "~/i18n";
+import { SupportedLanguages, Translation, translations } from "~/i18n";
 
-// create a hook to get the language from the i18n next.js useRouter
-export const useTranslation = () => {
+export function useTranslation(): Translation {
   const router = useRouter();
   const { locale, defaultLocale } = router;
   return translations[(locale ?? defaultLocale ?? "pt") as SupportedLanguages];
-};
+}

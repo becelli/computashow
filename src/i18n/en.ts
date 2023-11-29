@@ -35,7 +35,13 @@ export const en: Translation = {
     },
   },
   topics: {
-    computerArchitecture: "Computer Architecture",
-    operatingSystems: "Operating Systems",
+    computerArchitecture: {
+      name: "Computer Architecture",
+      questions: [],
+    },
+    operatingSystems: {
+      name: "Operating Systems",
+      questions: [],
+    },
   },
 };

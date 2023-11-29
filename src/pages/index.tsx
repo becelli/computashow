@@ -16,7 +16,7 @@ const TopicButton = ({ topic }: { topic: Topic }) => {
   return (
     <Link href={topicUrl}>
       <button className={`w-full p-3 transition duration-300 ease-in rounded-sm ${bgColor} hover:scale-105 text-text`}>
-        <span className="text-xl text-surface0">{translation.topics[topic]}</span>
+        <span className="text-xl text-surface0">{translation.topics[topic].name}</span>
       </button>
     </Link>
   );

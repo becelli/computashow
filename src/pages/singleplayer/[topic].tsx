@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
+import assert from "assert";
 import confetti from "canvas-confetti";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -13,8 +14,9 @@ import { useTranslation } from "~/i18n/hooks/use-translation";
 export default function SinglePlayerGame(): React.ReactElement {
   // Set up the translation and questions
   const router = useRouter();
-  const questions = useQuestionTopic(router.query.topic);
+  assert(router.query.topic !== undefined && typeof router.query.topic === "string");
   const translation = useTranslation();
+  const questions = useQuestionTopic(translation, router.query.topic);
 
   // Define default settings
   const defaultGameStartCounter = 3;

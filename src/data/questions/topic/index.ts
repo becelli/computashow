@@ -1,11 +1,5 @@
 import { Question } from "~/data/questions/question";
-import { computerArchitectureQuestions } from "~/data/questions/topic/computer-architecture";
-import { operatingSystemsQuestions } from "~/data/questions/topic/operating-systems";
-
-const questionCategories: Record<Topic, Question[]> = {
-  computerArchitecture: computerArchitectureQuestions,
-  operatingSystems: operatingSystemsQuestions,
-};
+import { Translation } from "~/i18n";
 
 interface TopicColors {
   font: string;
@@ -31,16 +25,16 @@ export enum Topic {
   operatingSystems = "operatingSystems",
 }
 
-export function useQuestionTopic(category?: string | string[]): Question[] {
-  if (Object.keys(questionCategories).includes(category as string)) {
-    return questionCategories[category as Topic];
+export function useQuestionTopic(translation: Translation, category: string): Question[] {
+  if (!Object.keys(translation.topics).includes(category as Topic)) {
+    return translation.topics.computerArchitecture.questions;
   }
-  return questionCategories.computerArchitecture;
+  return translation.topics[category as Topic].questions;
 }
 
-export function useQuestionTopicColor(type: keyof TopicColors, category?: string | string[]): string {
-  if (Object.keys(questionCategories).includes(category as string)) {
-    return topicColors[category as Topic][type];
+export function useQuestionTopicColor(type: keyof TopicColors, category: unknown): string {
+  if (!Object.keys(topicColors).includes(category as Topic)) {
+    return topicColors.computerArchitecture[type];
   }
-  return topicColors.computerArchitecture[type];
+  return topicColors[category as Topic][type];
 }
