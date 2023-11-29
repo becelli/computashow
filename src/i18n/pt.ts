@@ -376,7 +376,6 @@ export const pt = {
           difficulty: QuestionDifficulty.hard,
           correctResponse: 3,
         },
-
         {
           predicate: "O que é o método de minimização de Karnaugh em circuitos digitais?",
           answers: [
