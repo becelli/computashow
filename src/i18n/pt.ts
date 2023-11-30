@@ -472,7 +472,12 @@ export const pt = {
       questions: [
         {
           predicate: "O que é são os drivers de dispositivos?",
-          answers: ["Motoristas de ônibus", "Programas que permitem o funcionamento de um dispositivo", "Módulos de memória", "Interfaces de rede"],
+          answers: [
+            "Motoristas de ônibus",
+            "São programas que garantem a comunicação eficiente entre o sistema operacional e o hardware, assegurando que o dispositivo seja reconhecido e utilizado corretamente",
+            "Os drivers de dispositivos são como módulos de memória que armazenam informações essenciais para o funcionamento do hardware",
+            "São programas que o computador se transforme em um ônibus e transporte pessoas",
+          ],
           difficulty: QuestionDifficulty.easy,
           correctResponse: 2,
         },
@@ -626,12 +631,12 @@ export const pt = {
           correctResponse: 1,
         },
         {
-          predicate: "O que é a diferença entre sistemas operacionais de 32 bits e 64 bits?",
+          predicate: "O que é a virtualização em sistemas operacionais?",
           answers: [
-            "A quantidade de memória que o sistema pode suportar.",
-            "A velocidade de processamento do sistema.",
-            "A quantidade de processos que o sistema pode executar simultaneamente.",
-            "A capacidade de armazenamento do disco rígido.",
+            "A virtualização permite isolar recursos de hardware, como CPU, memória e armazenamento, para criar ambientes virtuais independentes.",
+            "Ela possibilita a execução de múltiplas máquinas virtuais em um único servidor físico, permitindo a consolidação de recursos e maior eficiência.",
+            "A virtualização é amplamente usada em ambientes de teste e desenvolvimento, permitindo a criação de ambientes isolados para experimentação.",
+            "Permite a migração dinâmica de máquinas virtuais entre servidores físicos sem interrupção de serviço, aumentando a flexibilidade e a disponibilidade.",
           ],
           difficulty: QuestionDifficulty.medium,
           correctResponse: 1,
@@ -802,12 +807,12 @@ export const pt = {
           correctResponse: 2,
         },
         {
-          predicate: "Qual é a diferença entre sistemas operacionais de 32 bits e 64 bits?",
+          predicate: "Qual é a função principal de um firewall em uma rede de computadores?",
           answers: [
-            "Sistemas de 64 bits têm o dobro do desempenho dos sistemas de 32 bits.",
-            "Sistemas de 32 bits são mais rápidos, mas menos estáveis que sistemas de 64 bits.",
-            "Sistemas de 64 bits suportam maior quantidade de RAM e processamento de dados.",
-            "Sistemas de 32 bits são mais econômicos e consomem menos energia.",
+            "Firewalls são projetados para aumentar a velocidade da conexão à Internet.",
+            "A principal função é detectar e remover vírus presentes nos computadores da rede.",
+            "Firewalls controlam e monitoram o tráfego de rede, decidindo quais comunicações são permitidas ou bloqueadas.",
+            "Firewalls otimizam a resolução de nomes de domínio para tornar a navegação mais eficiente.",
           ],
           difficulty: QuestionDifficulty.hard,
           correctResponse: 3,

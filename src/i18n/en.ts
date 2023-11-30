@@ -459,7 +459,12 @@ export const en: Translation = {
       questions: [
         {
           predicate: "What are device drivers?",
-          answers: ["Bus drivers", "Programs that enable the operation of a device", "Memory modules", "Network interfaces"],
+          answers: [
+            "Bus drivers",
+            "They are programs that ensure efficient communication between the operating system and hardware, ensuring that the device is recognized and used correctly",
+            "Device drivers are like memory modules that store essential information for hardware operation",
+            "Programs that transform the computer into a bus and transport people",
+          ],
           difficulty: QuestionDifficulty.easy,
           correctResponse: 2,
         },
@@ -608,15 +613,15 @@ export const en: Translation = {
           correctResponse: 1,
         },
         {
-          predicate: "What is the difference between 32-bit and 64-bit operating systems?",
+          predicate: "What is virtualization in operating systems?",
           answers: [
-            "The amount of memory the system can support.",
-            "The processing speed of the system.",
-            "The number of processes the system can run simultaneously.",
-            "The storage capacity of the hard drive.",
+            "Virtualization allows isolating hardware resources such as CPU, memory, and storage to create independent virtual environments.",
+            "It enables the execution of multiple virtual machines on a single physical server, allowing resource consolidation and greater efficiency.",
+            "Virtualization is widely used in test and development environments, allowing the creation of isolated environments for experimentation.",
+            "It allows the dynamic migration of virtual machines between physical servers without service interruption, increasing flexibility and availability.",
           ],
           difficulty: QuestionDifficulty.medium,
-          correctResponse: 1,
+          correctResponse: 2,
         },
         {
           predicate: "What is paging in operating systems?",
@@ -784,15 +789,15 @@ export const en: Translation = {
           correctResponse: 2,
         },
         {
-          predicate: "What is the difference between 32-bit and 64-bit operating systems?",
+          predicate: "What is the main function of a firewall in a computer network?",
           answers: [
-            "64-bit systems have double the performance of 32-bit systems.",
-            "32-bit systems are faster but less stable than 64-bit systems.",
-            "64-bit systems support a greater amount of RAM and data processing.",
-            "32-bit systems are more economical and consume less power.",
+            "Firewalls are designed to increase Internet connection speed.",
+            "The main function is to detect and remove viruses present on network computers.",
+            "Firewalls control and monitor network traffic, deciding which communications are allowed or blocked.",
+            "Firewalls optimize domain name resolution to make browsing more efficient.",
           ],
           difficulty: QuestionDifficulty.hard,
-          correctResponse: 3,
+          correctResponse: 2,
         },
         {
           predicate: "What is I/O (Input/Output) scheduling in operating systems?",
