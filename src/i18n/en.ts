@@ -45,16 +45,16 @@ export const en: Translation = {
             "A circuit that operates with analog signals",
             "A circuit that operates with digital signals",
             "A circuit that operates with continuous signals",
-            "A circuit that operates with discrete signals"
+            "A circuit that operates with discrete signals",
           ],
           difficulty: QuestionDifficulty.easy,
-          correctResponse: 2
+          correctResponse: 2,
         },
         {
           predicate: "Which numerical system is most commonly used in digital circuits?",
           answers: ["Decimal system", "Binary system", "Hexadecimal system", "Octal system"],
           difficulty: QuestionDifficulty.easy,
-          correctResponse: 2
+          correctResponse: 2,
         },
         {
           predicate: 'What is a "logical gate" in digital circuits?',
@@ -62,22 +62,22 @@ export const en: Translation = {
             "A device for performing floating-point number calculations",
             "A component for converting digital signals to analog signals",
             "A device that performs a logical operation",
-            "A type of battery"
+            "A type of battery",
           ],
           difficulty: QuestionDifficulty.easy,
-          correctResponse: 3
+          correctResponse: 3,
         },
         {
           predicate: 'What is the result of the "AND" operation when the operands are 1 and 0, respectively?',
           answers: ["1", "0", "Depends on the values of the operands", "2"],
           difficulty: QuestionDifficulty.easy,
-          correctResponse: 2
+          correctResponse: 2,
         },
         {
           predicate: 'What is the result of the "Exclusive OR" (XOR) operation when both operands are equal?',
           answers: ["1", "0", "Depends on the values of the operands", "2"],
           difficulty: QuestionDifficulty.easy,
-          correctResponse: 2
+          correctResponse: 2,
         },
         {
           predicate: "What is a flip-flop in digital circuits?",
@@ -85,19 +85,14 @@ export const en: Translation = {
             "A memory device that stores a single bit of information",
             "A device used to generate square waves",
             "A type of transistor",
-            "A device for generating analog signals"
+            "A device for generating analog signals",
           ],
           difficulty: QuestionDifficulty.easy,
-          correctResponse: 1
+          correctResponse: 1,
         },
         {
           predicate: "Qual é a função principal de um codificador em circuitos digitais?",
-          answers: [
-            "Compact data to occupy less space.",
-            "Adjust current to make the circuit smile",
-            "Encode information",
-            "Juggle with analog signals",
-          ],
+          answers: ["Compact data to occupy less space.", "Adjust current to make the circuit smile", "Encode information", "Juggle with analog signals"],
           difficulty: QuestionDifficulty.easy,
           correctResponse: 3,
         },
@@ -421,7 +416,7 @@ export const en: Translation = {
           ],
           difficulty: QuestionDifficulty.hard,
           correctResponse: 1,
-        }        
+        },
       ],
     },
     operatingSystems: {
@@ -457,12 +452,7 @@ export const en: Translation = {
         },
         {
           predicate: "What is a file in an operating system?",
-          answers: [
-            "A central processing unit of the system.",
-            "A graphical user interface.",
-            "A storage unit for data.",
-            "Security software.",
-          ],
+          answers: ["A central processing unit of the system.", "A graphical user interface.", "A storage unit for data.", "Security software."],
           difficulty: QuestionDifficulty.easy,
           correctResponse: 3,
         },

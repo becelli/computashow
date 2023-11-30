@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import assert from "assert";
 import confetti from "canvas-confetti";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
