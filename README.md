@@ -19,6 +19,9 @@ ComputaShow is a quiz-based game where players tackle multiple-choice questions 
 - **Skip Option:** Players can skip up to three questions per game, though skipping does not earn points. This feature is intended as a last resort.
 - **Question Difficulty:** Fifteen questions of escalating difficulty are presented, with difficulty levels not disclosed to players. The player's score is determined by the number of questions answered correctly.
 - **Randomization:** Questions and answer options are randomized to prevent memorization. However, this is a temporary solution, as a database of questions and answers would be more effective.
+- **Internationalization:** The game supports Portuguese, English, and Spanish. The language is changed automatically based on the browser's language settings, but can also be changed manually on the URL.
+- **Responsive Design:** The game is responsive and can be played on mobile devices, tablets, and desktops.
+- **Rules:** The game features a rules popup, which explains the game's mechanics and scoring system.
 
 ### Technical Framework
 
