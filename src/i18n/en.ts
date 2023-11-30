@@ -319,7 +319,7 @@ export const en: Translation = {
           correctResponse: 1,
         },
         {
-          predicate: "Question: In terms of processor architecture, what characterizes exception handling units?",
+          predicate: "In terms of processor architecture, what characterizes exception handling units?",
           answers: [
             "Units responsible for transferring data between the CPU and memory.",
             "Units responsible for controlling the execution of instructions.",
