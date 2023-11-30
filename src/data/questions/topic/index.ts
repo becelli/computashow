@@ -25,7 +25,7 @@ export enum Topic {
   operatingSystems = "operatingSystems",
 }
 
-export function useQuestionTopic(translation: Translation, category: string): Question[] {
+export function useQuestionTopic(translation: Translation, category: unknown): Question[] {
   if (!Object.keys(translation.topics).includes(category as Topic)) {
     return translation.topics.computerArchitecture.questions;
   }

@@ -14,7 +14,6 @@ import { useTranslation } from "~/i18n/hooks/use-translation";
 export default function SinglePlayerGame(): React.ReactElement {
   // Set up the translation and questions
   const router = useRouter();
-  assert(router.query.topic !== undefined && typeof router.query.topic === "string");
   const translation = useTranslation();
   const questions = useQuestionTopic(translation, router.query.topic);
 
