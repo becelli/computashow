@@ -364,7 +364,7 @@ export const pt = {
         },
 
         {
-          predicate: "Pergunta: Em termos de arquitetura de processadores, o que caracteriza as unidades de tratamento de exceções?",
+          predicate: "Em termos de arquitetura de processadores, o que caracteriza as unidades de tratamento de exceções?",
           answers: [
             "Unidades responsáveis por transferir dados entre a CPU e a memória.",
             "Unidades responsáveis por controlar a execução das instruções.",
