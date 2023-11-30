@@ -126,7 +126,7 @@ export const en: Translation = {
           correctResponse: 1,
         },
         {
-          predicate: "Qual é a função principal de um codificador em circuitos digitais?",
+          predicate: "What is the main function of an encoder in digital circuits?",
           answers: ["Compact data to occupy less space.", "Adjust current to make the circuit smile", "Encode information", "Juggle with analog signals"],
           difficulty: QuestionDifficulty.easy,
           correctResponse: 3,
@@ -143,13 +143,13 @@ export const en: Translation = {
           correctResponse: 2,
         },
         {
-          predicate: "Qual é a unidade de medida padrão para representar a frequência do clock em circuitos digitais",
+          predicate: "What is the standard unit of measurement for clock frequency in digital circuits?",
           answers: ["Megabytes", "Hertz", "Watts", "Volts"],
           difficulty: QuestionDifficulty.easy,
           correctResponse: 2,
         },
         {
-          predicate: "O que é a Unidade Central de Processamento (CPU) em um computador?",
+          predicate: "What is the Central Processing Unit (CPU) in a computer?",
           answers: [
             "The part of the computer responsible for executing instructions and processing data.",
             "The part of the computer where input devices are connected.",
@@ -160,7 +160,7 @@ export const en: Translation = {
           correctResponse: 1,
         },
         {
-          predicate: "Qual é a principal função da Memória RAM em um computador?",
+          predicate: "What is the main function of RAM in a computer?",
           answers: [
             "Temporarily store data and instructions for the CPU to access quickly.",
             "Permanently store system and user data.",
@@ -171,7 +171,7 @@ export const en: Translation = {
           correctResponse: 1,
         },
         {
-          predicate: "O que é um barramento de sistema em Arquitetura de Computadores?",
+          predicate: "What is a system bus in Computer Architecture?",
           answers: [
             "A device used to convert digital signals to analog signals.",
             "A unit specialized in processing graphics and images.",
