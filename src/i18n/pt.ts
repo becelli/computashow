@@ -2,6 +2,40 @@ import { QuestionDifficulty } from "~/data/questions/question-difficulty";
 
 export const pt = {
   gameName: "ComputaShow",
+  tooltips: {
+    title: "Regras do Jogo",
+    close: "Fechar",
+    tips: [
+      {
+        title: "Objetivo do Jogo",
+        description: "Ganhe o jogo ao acertar 15 perguntas consecutivas.",
+      },
+      {
+        title: "Seleção de Tópicos",
+        description: "Escolha tópicos de interesse no início do jogo.",
+      },
+      {
+        title: "Opção de Encerramento",
+        description: "Você pode decidir parar o jogo a qualquer momento.",
+      },
+      {
+        title: "Uso dos 'Pulos'",
+        description: 'Você tem direito a três "pulos" por jogo, que permitem reiniciar o cronômetro e trocar a pergunta atual, sem avançar de nível.',
+      },
+      {
+        title: "Pontuação",
+        description: "Os pontos são acumulados proporcionalmente ao número de perguntas acertadas.",
+      },
+      {
+        title: "Unicidade das Respostas",
+        description: "Cada pergunta tem apenas uma resposta correta.",
+      },
+      {
+        title: "Reporte de Erros",
+        description: "Se encontrar alguma resposta incorreta, por favor, reporte-a usando os links disponíveis na página inicial.",
+      },
+    ],
+  },
   home: {
     and: "e",
     welcome: "Bem-vindo ao ComputaShow!",
@@ -440,7 +474,7 @@ export const pt = {
           predicate: "O que é são os drivers de dispositivos?",
           answers: ["Motoristas de ônibus", "Programas que permitem o funcionamento de um dispositivo", "Módulos de memória", "Interfaces de rede"],
           difficulty: QuestionDifficulty.easy,
-          correctResponse: 1,
+          correctResponse: 2,
         },
         {
           predicate: "O que é um sistema operacional?",

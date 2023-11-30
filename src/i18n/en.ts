@@ -3,6 +3,41 @@ import { Translation } from "~/i18n";
 
 export const en: Translation = {
   gameName: "ComputaShow",
+  tooltips: {
+    title: "Game Rules",
+    close: "Close",
+    tips: [
+      {
+        title: "Game Objective",
+        description: "Win the game by correctly answering 15 consecutive questions.",
+      },
+      {
+        title: "Topic Selection",
+        description: "Choose topics of interest at the start of the game.",
+      },
+      {
+        title: "End Game Option",
+        description: "You can decide to stop the game at any time.",
+      },
+      {
+        title: "Use of 'Skips'",
+        description:
+          'You are entitled to three "skips" per game, which allow you to reset the timer and change the current question, without advancing in level.',
+      },
+      {
+        title: "Scoring",
+        description: "Points are accumulated in proportion to the number of questions answered correctly.",
+      },
+      {
+        title: "Uniqueness of Answers",
+        description: "Each question has only one correct answer.",
+      },
+      {
+        title: "Error Reporting",
+        description: "If you find any incorrect answers, please report them using the links available on the home page.",
+      },
+    ],
+  },
   home: {
     and: "and",
     welcome: "Welcome to ComputaShow!",

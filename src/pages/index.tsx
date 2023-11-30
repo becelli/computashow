@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { useState } from "react";
 
+import TooltipsModal from "~/app/tooltips/tooltips-modal";
 import { Topic, useQuestionTopicColor } from "~/data/questions/topic";
 import { useTranslation } from "~/i18n/hooks/use-translation";
 
@@ -24,12 +26,12 @@ const TopicButton = ({ topic }: { topic: Topic }) => {
 
 export default function App({ authors }: { authors: Author[] }) {
   const translation = useTranslation();
-  console.log(authors);
-
-  // Array of available topics
+  const [showTooltip, setShowTooltip] = useState(false);
 
   return (
     <section className="px-4 bg-base text-text md:px-4">
+      <TooltipsModal closeModal={() => setShowTooltip(false)} openModal={showTooltip} />
+
       <section className="flex items-center min-h-screen mx-auto via-green-900 from-black to-black">
         <div className="max-w-lg mx-auto text-center">
           <h1 className="mb-4 text-5xl font-extrabold text-text">{translation.home.welcome}</h1>
@@ -39,6 +41,9 @@ export default function App({ authors }: { authors: Author[] }) {
               <TopicButton key={topic} topic={topic} />
             ))}
           </div>
+          <button className="text-2xl" onClick={() => setShowTooltip(true)}>
+            ❔
+          </button>
         </div>
       </section>
       <footer className="flex flex-col items-center justify-center w-full h-24">

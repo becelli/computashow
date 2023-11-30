@@ -3,10 +3,44 @@ import { Translation } from "~/i18n";
 
 export const es: Translation = {
   gameName: "ComputaShow",
+  tooltips: {
+    title: "Reglas del Juego",
+    close: "Cerrar",
+    tips: [
+      {
+        title: "Objetivo del Juego",
+        description: "Gana el juego al acertar 15 preguntas consecutivas.",
+      },
+      {
+        title: "Selección de Temas",
+        description: "Elige temas de interés al inicio del juego.",
+      },
+      {
+        title: "Opción de Finalización",
+        description: "Puedes decidir parar el juego en cualquier momento.",
+      },
+      {
+        title: "Uso de los 'Saltos'",
+        description: `Tienes derecho a tres "saltos" por juego, que te permiten reiniciar el cronómetro y cambiar la pregunta actual, sin avanzar de nivel.`,
+      },
+      {
+        title: "Puntuación",
+        description: "Los puntos se acumulan proporcionalmente al número de preguntas acertadas.",
+      },
+      {
+        title: "Unicidad de las Respuestas",
+        description: "Cada pregunta tiene solo una respuesta correcta.",
+      },
+      {
+        title: "Reporte de Errores",
+        description: "Si encuentras alguna respuesta incorrecta, por favor, repórtala usando los enlaces disponibles en la página de inicio.",
+      },
+    ],
+  },
   home: {
     and: "y",
     welcome: "¡Bienvenido a ComputaShow!",
-    welcomeMessage: "¿Sabés de qué se trata? Es un juego de preguntas y respuestas sobre Arquitectura de Ordenadores y Sistemas Operativos.",
+    welcomeMessage: "¿Sabés de qué se trata? Es un juego de preguntas y respuestas sobre Arquitectura de Computadoras y Sistemas Operativos.",
     singlePlayer: "Vamos a jugar",
     projectDevelopedBy: "Este proyecto fue desarrollado por",
     forTheDisciplineOfFPGA: " para la asignatura de FPGA.",
@@ -37,7 +71,7 @@ export const es: Translation = {
   },
   topics: {
     computerArchitecture: {
-      name: "Arquitectura de Ordenadores",
+      name: "Arquitectura de Computadoras",
       questions: [
         {
           predicate: "¿Qué es un circuito digital?",
